@@ -1,0 +1,1550 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Мамины витамины на iHerb</title>
+<script>/* report kit — write only content blocks, the kit draws the page in one house style.
+ *
+ * Fork of leex279/agent-html-kit (MIT, https://github.com/leex279/agent-html-kit) with a new
+ * visual system, Russian UI texts and extra blocks. Original idea and base code by leex279. MIT licensed.
+ *
+ *   <!doctype html><meta charset="utf-8"><script src="kit/kit.js" defer><\/script>
+ *   <rk-header title="..."></rk-header> <h2 eyebrow="01 · ...">...</h2> <rk-stats>...</rk-stats>
+ *
+ * Components read their text content as short line-based data, so the agent never writes CSS,
+ * SVG paths or table markup. Syntax reference: contract.txt. python3 build.py inlines this file.
+ */
+(() => {
+  "use strict";
+
+  const FONTS = "https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap";
+
+  const STYLE = `
+:root{
+  --bg:#f3f4f2; --panel:#ffffff; --fg:#1b1f1d; --muted:#5d6661; --line:#d9ddd8;
+  --accent:#b86512; --accent-soft:#f6e7d4; --good:#2c7a4b; --good-soft:#dcefe2; --warn:#a8711a; --warn-soft:#f5ead2; --bad:#b0372b; --bad-soft:#f6dcd8;
+  --bar:#3c4a44; --bar2:#9aa59f;
+  --s1:#b86512; --s2:#6a4fd0; --s3:#0a9070; --s4:#2c5fc4; --s5:#c7386d;
+  --hover:rgba(27,31,29,.04); --lift:0 8px 20px rgba(27,31,29,.22); --lb-bg:rgba(20,23,22,.94); --lb-fg:#e7ebe8; --lb-btn:rgba(231,235,232,.14);
+  --f-display:"Unbounded","Onest",system-ui,sans-serif; --f-body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141716; --panel:#1c201e; --fg:#e7ebe8; --muted:#9aa49f; --line:#2f3532;
+  --accent:#e59a45; --accent-soft:#3a2a17; --good:#6cc48f; --good-soft:#1b3326; --warn:#e0b25a; --warn-soft:#3a3018; --bad:#ec7b6f; --bad-soft:#3d1f1b;
+  --bar:#c9d3ce; --bar2:#5f6a65; --accent-ink:var(--accent); --good-ink:var(--good); --warn-ink:var(--warn);
+  --s1:#c97a2a; --s2:#8a72e6; --s3:#229c7d; --s4:#4f85dd; --s5:#d65d8f;
+  --hover:rgba(231,235,232,.06); --lift:0 8px 20px rgba(0,0,0,.5); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141716; --panel:#1c201e; --fg:#e7ebe8; --muted:#9aa49f; --line:#2f3532;
+  --accent:#e59a45; --accent-soft:#3a2a17; --good:#6cc48f; --good-soft:#1b3326; --warn:#e0b25a; --warn-soft:#3a3018; --bad:#ec7b6f; --bad-soft:#3d1f1b;
+  --bar:#c9d3ce; --bar2:#5f6a65; --accent-ink:var(--accent); --good-ink:var(--good); --warn-ink:var(--warn);
+  --s1:#c97a2a; --s2:#8a72e6; --s3:#229c7d; --s4:#4f85dd; --s5:#d65d8f;
+  --hover:rgba(231,235,232,.06); --lift:0 8px 20px rgba(0,0,0,.5); color-scheme:dark}
+/* text-safe variants of the accent colours: small text on the soft tints needs more contrast than the fills do */
+:root{--accent-ink:color-mix(in srgb,var(--accent) 80%,var(--fg));--good-ink:#2a7146;--warn-ink:#7e581b;--bad-ink:var(--bad)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body.rk{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 var(--f-body);padding-inline:16px;padding-block:28px 64px;-webkit-font-smoothing:antialiased}
+.rk-page{max-width:920px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+.rk-sec{display:flex;flex-direction:column;gap:14px;min-width:0}
+.rk-page>*,.rk-sec>*{min-width:0}
+.rk-page h1,.rk-page h2{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.2}
+.rk-page h1{font-size:clamp(24px,4vw,34px);font-weight:700}
+.rk-page h2{font-size:20px;font-weight:600}
+.rk-page h3{font-size:16px;margin:0 0 6px}
+.rk-page p{margin:0;max-width:68ch}
+.rk-page ul,.rk-page ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;max-width:72ch}
+.rk-page li>ul,.rk-page li>ol{margin-top:6px}
+.rk-page a{color:var(--accent-ink)}
+.rk-page code{font:13px var(--f-mono);background:var(--line);color:var(--fg);padding:1px 5px;border-radius:4px}
+.rk-page pre{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow:auto;font:13px/1.55 var(--f-mono)}
+.rk-page pre code{background:none;padding:0;border-radius:0}
+.rk-page blockquote{margin:0;padding:2px 0 2px 14px;border-left:2px solid var(--line);color:var(--muted);max-width:68ch}
+.rk-page hr{border:0;border-top:1px solid var(--line);margin:0}
+.rk-page img{max-width:100%;height:auto;border-radius:6px}
+.rk-page li.rk-task{list-style:none;margin-left:-20px}
+.rk-page li.rk-task input{margin-right:8px;accent-color:var(--accent)}
+.rk-page footer,.rk-page .foot{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.rk-page b{font-weight:700}
+.rk-eyebrow{font:600 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block}
+.rk-page .lead{font-size:18px;max-width:64ch}
+.num,.rk-num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.rk-id{font:600 12px var(--f-mono);color:var(--accent-ink);background:var(--accent-soft);padding:1px 6px;border-radius:4px;white-space:nowrap}
+rk-header,rk-stats,rk-chart,rk-table,rk-callout,rk-diagram,rk-steps,rk-board,rk-cols,rk-status,rk-options,rk-gallery,rk-compare,rk-gauge,rk-checklist,rk-timeline,rk-findings,rk-toc,rk-cards{display:block}
+.rk-hd{display:flex;flex-direction:column;gap:12px}
+.rk-panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.rk-grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+.rk-grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:16px}
+.rk-grid3>*,.rk-grid2>*{min-width:0}
+.rk-fit{display:grid;gap:16px;grid-template-columns:repeat(var(--n),minmax(0,1fr))}.rk-fit>*{min-width:0}
+@media (max-width:700px){.rk-fit{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}}
+.rk-big{font:700 30px/1.1 var(--f-display);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.rk-note{font-size:14px;color:var(--muted)}
+.rk-note.good{color:var(--good-ink)}.rk-note.bad{color:var(--bad-ink)}
+.rk-cap{font-size:13px;color:var(--muted)}
+.rk-stripe{position:relative;overflow:hidden}
+.rk-stripe::before{content:"";position:absolute;inset:0 auto 0 0;width:var(--sw,4px);background:var(--c,var(--accent))}
+.rk-scroll{overflow-x:auto}
+/* pills */
+.rk-pill{display:inline-block;font:600 12px/1.6 var(--f-mono);padding:0 8px;border:1px solid transparent;border-radius:999px;white-space:nowrap}
+.rk-pill.good{background:var(--good-soft);color:var(--good-ink)}
+.rk-pill.accent{background:var(--accent-soft);color:var(--accent-ink)}
+.rk-pill.warn{background:var(--warn-soft);color:var(--warn-ink)}
+.rk-pill.bad{background:var(--bad-soft);color:var(--bad-ink)}
+.rk-pill.todo{background:var(--bg);color:var(--muted);border-color:var(--line)}
+/* bars */
+.rk-bars{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) max-content;gap:2px 12px;align-items:center;font-size:14px}
+.rk-r{display:grid;grid-column:1/-1;grid-template-columns:subgrid;align-items:center;padding:4px 8px;margin-inline:-8px;border-radius:6px}
+.rk-bars .b{height:14px;background:var(--bar);border-radius:3px;min-width:2px;transform-origin:left center}
+.rk-bars .b.s{background:var(--bar2)}.rk-bars .b.hi{background:var(--bad)}.rk-bars .b.ok{background:var(--good)}.rk-bars .b.w{background:var(--warn)}.rk-bars .b.ac{background:var(--accent)}
+.rk-bars .b.s1{background:var(--s1)}.rk-bars .b.s2{background:var(--s2)}.rk-bars .b.s3{background:var(--s3)}.rk-bars .b.s4{background:var(--s4)}.rk-bars .b.s5{background:var(--s5)}.rk-bars .b.sx{background:var(--bar2)}
+.rk-sw.s1{background:var(--s1)}.rk-sw.s2{background:var(--s2)}.rk-sw.s3{background:var(--s3)}.rk-sw.s4{background:var(--s4)}.rk-sw.s5{background:var(--s5)}.rk-sw.sx{background:var(--bar2)}
+.rk-leg{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--fg)}
+.rk-leg span{display:inline-flex;align-items:center}
+.rk-bars .v{font-family:var(--f-mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rk-bars .l{overflow-wrap:anywhere}
+.rk-bars .g{grid-column:1/-1;font:600 12px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:10px}
+.rk-bars .g:first-child{padding-top:0}
+@media (max-width:520px){
+  .rk-bars{display:flex;flex-direction:column;align-items:stretch;gap:6px}
+  .rk-r{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:baseline}
+  .rk-r .v{order:2}.rk-r .b{order:3;grid-column:1/-1}
+}
+/* tables */
+.rk-tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.rk-tw table{border-collapse:collapse;width:100%;font-size:14px}
+.rk-tw table.wide{min-width:640px}
+@media (max-width:600px){.rk-tw table.wide{min-width:0}.rk-tw table.wide thead,.rk-tw table.wide tr:has(th){display:none}
+.rk-tw table.wide tr{display:block;padding:10px 14px;border-bottom:1px solid var(--line)}.rk-tw table.wide tr:last-child{border-bottom:0}
+.rk-tw table.wide td{display:grid;grid-template-columns:minmax(0,36%) minmax(0,1fr);gap:10px;border:0;padding:3px 0;white-space:normal}
+.rk-tw table.wide td::before{content:attr(data-l);font:600 12px/1.5 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.rk-tw table.wide td:first-child{display:block;font-weight:600;padding-bottom:6px}.rk-tw table.wide td:first-child::before{display:none}
+.rk-tw table.wide td:empty{display:none}}
+.rk-tw th,.rk-tw td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.rk-tw th{font:600 12px/1.3 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--panel)}
+.rk-tw tr:last-child td{border-bottom:0}
+.rk-tw td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.rk-tw tr.pick td{background:var(--good-soft)}
+/* callouts */
+.rk-callout{--c:var(--accent);position:relative;overflow:hidden;background:var(--accent-soft);border-radius:0 10px 10px 0;padding:12px 16px 12px 19px;display:flex;flex-direction:column;gap:4px;font-size:15px}
+.rk-callout::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--c)}
+.rk-callout.risk{--c:var(--bad);background:var(--bad-soft)}
+.rk-callout.warn{--c:var(--warn);background:var(--warn-soft)}
+.rk-callout.ok{--c:var(--good);background:var(--good-soft)}
+.rk-callout .t{font-weight:700}
+.rk-callout p{max-width:none}
+.rk-callout.verdict{background:var(--accent-soft);border-radius:12px;padding:20px 22px;gap:10px;font-size:16px}
+.rk-callout.verdict::before{display:none}
+.rk-callout.verdict p,.rk-callout.verdict .t{font-size:18px}
+/* cols */
+.rk-yes,.rk-no{position:relative;overflow:hidden;padding-left:22px}
+.rk-yes{--c:var(--good)}.rk-no{--c:var(--bad)}
+.rk-yes::before,.rk-no::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--c)}
+.rk-bare1{display:flex!important;flex-direction:column}
+.rk-bare1>:is(.rk-panel,.rk-tw){flex:1}
+.rk-bare{display:flex;flex-direction:column}
+.rk-bare>*{flex:1;display:flex;flex-direction:column;min-width:0}
+.rk-bare>*>:is(.rk-panel,.rk-tw){flex:1}
+/* steps */
+.rk-page .rk-steps{list-style:none;padding:0;max-width:none;gap:12px;counter-reset:s}
+.rk-step{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.rk-step::before{counter-increment:s;content:counter(s);font:700 20px/1 var(--f-display);color:var(--accent-ink)}
+.rk-step .body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.rk-step h3{margin:0}
+.rk-step .meta{font:500 13px/1.4 var(--f-mono);color:var(--muted)}
+/* gauge */
+.rk-gauge .track{position:relative;height:28px;background:var(--line);border-radius:6px;overflow:hidden}
+.rk-gauge .fill{position:absolute;inset:0 auto 0 0;border-radius:6px 0 0 6px}
+.rk-gauge .mark{position:absolute;top:0;bottom:0;width:2px;background:var(--fg)}
+.rk-gauge .leg{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px}
+.rk-sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+/* status */
+.rk-status{--c:var(--good);gap:12px;padding:18px 20px 18px 24px}
+.rk-status.warn{--c:var(--warn)}.rk-status.fail{--c:var(--bad)}
+.rk-status .main{display:flex;gap:12px;align-items:flex-start;font:600 20px/1.35 var(--f-display);text-wrap:pretty}
+.rk-status .em{flex:none;font-size:1.15em;line-height:1.2}
+.rk-status .you{background:var(--accent-soft);border-radius:8px;padding:10px 14px;font-size:16px}
+.rk-status .you b{color:var(--accent-ink)}
+.rk-status ul{padding-left:20px;gap:4px;font-size:15px}
+/* options */
+.rk-optgrid{align-items:start}
+.rk-opt{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.rk-opt.rec{border-color:var(--good);background:var(--good-soft)}
+.rk-opt h3{margin:0;font-size:16px}
+.rk-opt .f{display:flex;flex-direction:column;gap:2px;font-size:14px}
+.rk-opt .k{font:600 12px/1.3 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.rk-badge{align-self:flex-start;font:600 12px/1.6 var(--f-mono);padding:0 8px;border-radius:999px;background:var(--good);color:var(--panel)}
+/* gallery + compare */
+.rk-gal{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:16px}
+.rk-fig{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rk-frame{display:block;position:relative;width:100%;aspect-ratio:16/9;margin:0;padding:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;cursor:zoom-in}
+.rk-page .rk-frame img{display:block;width:100%;height:100%;object-fit:contain;border-radius:0}
+.rk-cmp{display:flex;flex-direction:column;gap:20px}
+.rk-pair{display:flex;flex-direction:column;gap:6px}
+.rk-pair .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rk-pair .side{display:flex;flex-direction:column;gap:6px;min-width:0}
+.rk-pair .lab{font:600 12px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:700px){.rk-gal{grid-template-columns:repeat(min(var(--cols,3),2),minmax(0,1fr))}}
+@media (max-width:360px){.rk-gal{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:600px){.rk-pair .two{grid-template-columns:minmax(0,1fr)}}
+.rk-lb{position:fixed;inset:0;z-index:1000;background:var(--lb-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:56px 16px 24px;font-family:var(--f-body)}
+.rk-lb img{width:min(94vw,1400px);height:76vh;object-fit:contain;border-radius:6px}
+.rk-lb .cap{color:var(--lb-fg);font-size:15px;text-align:center;max-width:70ch}
+.rk-lb button{position:absolute;width:44px;height:44px;border:0;border-radius:50%;background:var(--lb-btn);color:var(--lb-fg);font:400 24px/1 var(--f-body);cursor:pointer}
+.rk-lb .x{top:8px;right:8px}.rk-lb .p{left:8px;top:50%}.rk-lb .nx{right:8px;top:50%}
+/* checklist */
+.rk-cl .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.rk-cl .top .r{display:flex;align-items:baseline;gap:10px}
+.rk-mini{font:600 12px/1 var(--f-mono);color:var(--muted);background:none;border:1px solid var(--line);border-radius:6px;padding:6px 9px;cursor:pointer}.rk-mini:hover{color:var(--fg);border-color:var(--muted)}
+.rk-toc ol{columns:2 260px;column-gap:28px;padding-left:22px;display:block;margin:0}.rk-toc li{break-inside:avoid;padding:3px 0}.rk-toc a{color:var(--fg);text-decoration:none}.rk-toc a:hover{color:var(--accent-ink);text-decoration:underline}
+.rk-card h3{font-size:16px;line-height:1.35;margin:0}.rk-card p{font-size:15px}.rk-card .m{font:500 13px/1.4 var(--f-mono);color:var(--muted)}
+.rk-toc .top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+@media print{.rk-noprint{display:none!important}body{padding:0}.rk-panel,rk-table,rk-chart,rk-callout,rk-status{break-inside:avoid}}
+.rk-cl h3{margin:0}
+.rk-cl .cnt{font:600 13px var(--f-mono);color:var(--muted);white-space:nowrap}
+.rk-ci{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.rk-ci input{flex:none;width:18px;height:18px;margin:2px 0 0;accent-color:var(--accent)}
+.rk-ci.blocked span{color:var(--bad-ink);font-weight:600}
+.rk-ci span{text-decoration:line-through;text-decoration-color:transparent}
+.rk-ci input:checked+span{color:var(--muted);text-decoration-color:currentColor}
+.rk-page .rk-list{list-style:none;padding:0;gap:10px;max-width:none}
+/* timeline */
+.rk-page .rk-tl{list-style:none;padding:0;gap:0;max-width:none}
+.rk-tl li{position:relative;padding:0 0 18px 30px;display:flex;flex-direction:column;gap:2px}
+.rk-tl li:last-child{padding-bottom:0}
+.rk-tl li::before{content:"";position:absolute;left:5px;top:8px;bottom:-8px;width:2px;background:var(--line)}
+.rk-tl li:last-child::before{display:none}
+.rk-tl li::after{content:"";position:absolute;left:0;top:5px;width:12px;height:12px;border-radius:50%;background:var(--dot,var(--accent))}
+.rk-tl .d{font:600 12px/1.4 var(--f-mono);letter-spacing:.04em;color:var(--muted)}
+.rk-tl .t{font-weight:700}
+.rk-tl .x{color:var(--muted);font-size:14px}
+/* findings */
+.rk-fi{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:baseline}
+.rk-fi .tag{font:600 12px/1.6 var(--f-mono);padding:0 8px;border-radius:4px;white-space:nowrap}
+.rk-fi .t-bad{background:var(--bad-soft);color:var(--bad-ink)}.rk-fi .t-ok{background:var(--good-soft);color:var(--good-ink)}
+.rk-fi .t-mid{background:var(--accent-soft);color:var(--accent-ink)}.rk-fi .t-mu{background:var(--bg);color:var(--muted)}
+@media (max-width:500px){.rk-fi{grid-template-columns:minmax(0,1fr)}.rk-fi .tag{justify-self:start}}
+/* svg charts and diagrams */
+.rk-svg{display:block;height:auto}
+.rk-svg text{font-family:var(--f-body);fill:var(--fg)}
+.rk-svg .ax{font-family:var(--f-mono);fill:var(--muted)}
+.rk-svg .val{font-family:var(--f-mono);font-weight:600}
+.rk-svg .grid{stroke:var(--line);stroke-width:1}
+.rk-svg .bar{fill:var(--bar)}.rk-svg .bar.pk{fill:var(--accent)}
+.rk-svg .ln{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.rk-svg .dot{fill:var(--panel);stroke:var(--accent);stroke-width:2}
+.rk-svg .avg{stroke:var(--warn);stroke-width:2;stroke-dasharray:7 6}
+.rk-svg .avgt{fill:var(--warn-ink);font-family:var(--f-mono);font-weight:600}
+.rk-edge{fill:none;stroke:var(--bar2);stroke-width:1.8}
+.rk-labbox{fill:var(--panel);stroke:var(--line)}
+.rk-svg .rk-labtxt{fill:var(--muted)}
+.rk-svg .rk-nt{font-weight:600;fill:var(--fg)}
+/* board */
+.rk-board{display:flex;flex-direction:column;gap:10px}
+.rk-board .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.rk-board h3{margin:0}
+.rk-board .lanes{display:grid;gap:12px;grid-template-columns:repeat(var(--n),minmax(0,1fr))}
+.rk-lane{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px;min-height:160px;min-width:0;transition:background .15s}
+.rk-lane.over{background:var(--accent-soft)}
+.rk-lane.inbox{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:8px;min-height:90px;border-style:dashed}
+.rk-lane.inbox .lh{grid-column:1/-1;padding-bottom:2px}
+.rk-lane .lh{display:flex;justify-content:space-between;font:600 12px/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:2px 4px 8px}
+.rk-item{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 11px;margin-bottom:8px;cursor:grab;font-size:14px;overflow-wrap:anywhere}
+.rk-lane.inbox .rk-item{margin:0}
+.rk-item .id{font:600 12px var(--f-mono);color:var(--accent-ink)}
+.rk-item.drag{opacity:.4}
+.rk-item.pick{outline:2px solid var(--accent);outline-offset:1px}
+.rk-item.lift,.rk-item.pick{box-shadow:var(--lift);position:relative;z-index:2}
+.rk-board .hint{font-size:13px;color:var(--muted)}
+.rk-btn{font:600 13px var(--f-body);color:var(--panel);background:var(--fg);border:0;border-radius:8px;padding:8px 14px;cursor:pointer}
+.rk-toast{font:600 13px var(--f-mono);color:var(--good-ink);min-height:1em}
+.rk-out{width:100%;min-height:120px;font:13px/1.5 var(--f-mono);color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px;display:none}
+@media (max-width:700px){.rk-board .lanes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.rk-board .lanes{grid-template-columns:minmax(0,1fr)}}
+/* series colours (fixed order, never cycled) */
+.rk-svg .bar.s1{fill:var(--s1)}.rk-svg .bar.s2{fill:var(--s2)}.rk-svg .bar.s3{fill:var(--s3)}.rk-svg .bar.s4{fill:var(--s4)}.rk-svg .bar.s5{fill:var(--s5)}.rk-svg .bar.sx{fill:var(--bar2)}
+.rk-svg .ln.s1{stroke:var(--s1)}.rk-svg .ln.s2{stroke:var(--s2)}.rk-svg .ln.s3{stroke:var(--s3)}.rk-svg .ln.s4{stroke:var(--s4)}.rk-svg .ln.s5{stroke:var(--s5)}.rk-svg .ln.sx{stroke:var(--bar2)}
+.rk-svg .dot.s1{stroke:var(--s1)}.rk-svg .dot.s2{stroke:var(--s2)}.rk-svg .dot.s3{stroke:var(--s3)}.rk-svg .dot.s4{stroke:var(--s4)}.rk-svg .dot.s5{stroke:var(--s5)}.rk-svg .dot.sx{stroke:var(--bar2)}
+/* chart hover: hit areas, crosshair, tooltip */
+.rk-cw{position:relative}
+.rk-svg .hit{fill:transparent;cursor:default}
+.rk-svg .hit:focus{outline:none}
+.rk-svg .hit:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.rk-svg .hov{fill:var(--hover);opacity:0}
+.rk-svg .cross{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0}
+.rk-svg .on .hov,.rk-svg .on .cross{opacity:1}
+.rk-tip{position:absolute;top:0;left:0;z-index:5;display:none;pointer-events:none;background:var(--panel);color:var(--fg);border:1px solid var(--muted);border-radius:8px;padding:8px 10px;font-size:13px;line-height:1.4;white-space:nowrap;flex-direction:column;gap:2px}
+.rk-tip.show{display:flex}
+.rk-tip .th{font:600 12px/1.3 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.rk-tip .tr{display:flex;align-items:center;gap:8px}.rk-tip .tr b{margin-left:auto;padding-left:14px;font:600 13px var(--f-mono);font-variant-numeric:tabular-nums}
+/* focus ring on every interactive element */
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* hover tints (colour only; movement is below, under reduced-motion: no-preference) */
+@media (hover:hover){
+  .rk-r:hover{background:var(--hover)}
+  .rk-tw tbody tr:hover td{background:var(--hover)}.rk-tw tbody tr.pick:hover td{background:var(--good-soft)}
+  .rk-hov:hover{border-color:var(--muted)}
+}
+/* motion: everything below runs once on load or on interaction, and only when the viewer allows motion */
+@media (prefers-reduced-motion: no-preference){
+  @keyframes rk-grow{from{transform:scaleX(0)}}
+  @keyframes rk-growy{from{transform:scaleY(0)}}
+  @keyframes rk-draw{from{stroke-dasharray:1;stroke-dashoffset:1}to{stroke-dasharray:1;stroke-dashoffset:0}}
+  @keyframes rk-fade{from{opacity:0}}
+  @keyframes rk-lbin{from{opacity:0}}@keyframes rk-lbimg{from{transform:scale(.96)}}
+  @keyframes rk-lbout{to{opacity:0}}@keyframes rk-lbimgout{to{transform:scale(.96)}}
+  @keyframes rk-pop{50%{transform:scale(1.3)}}
+  .rk-bars .b,.rk-gauge .fill{animation:rk-grow .7s cubic-bezier(.2,.7,.2,1) calc(var(--i,0)*35ms) backwards}
+  .rk-svg .bar{transform-box:fill-box;transform-origin:bottom;animation:rk-growy .7s cubic-bezier(.2,.7,.2,1) calc(var(--i,0)*35ms) backwards}
+  .rk-svg .ln{animation:rk-draw .9s cubic-bezier(.2,.7,.2,1) backwards}
+  .rk-svg .dot,.rk-svg .val{animation:rk-fade .3s ease-out .85s backwards}
+  .rk-r{transition:background-color .15s}
+  .rk-tw tbody td{transition:background-color .15s}
+  .rk-hov{transition:border-color .15s,transform .15s}
+  @media (hover:hover){.rk-hov:hover{transform:translateY(-1px)}}
+  .rk-frame img{transition:transform .2s}
+  @media (hover:hover){.rk-frame:hover img{transform:scale(1.02)}}
+  .rk-lb{animation:rk-lbin .18s ease-out}.rk-lb img{animation:rk-lbimg .18s ease-out}
+  .rk-lb.out{animation:rk-lbout .18s ease-in forwards}.rk-lb.out img{animation:rk-lbimgout .18s ease-in forwards}
+  .rk-ci span{transition:color .2s,text-decoration-color .2s}
+  .rk-ci input.pop{animation:rk-pop .25s ease-out}
+  .rk-item{transition:box-shadow .15s,transform .15s,opacity .15s}.rk-item.lift,.rk-item.pick{transform:translateY(-2px)}
+}
+/* plain markdown mode (rk-md plain) */
+body.rk-plain .rk-page h1,body.rk-plain .rk-page h2{font-family:var(--f-body);border-bottom:1px solid var(--line);padding-bottom:6px}
+`;
+
+  // pill kinds: english and russian aliases -> colour class. The text shown is what was written in the brackets.
+  const PILLK = {
+    done: "good", ok: "good", "сделано": "good",
+    progress: "accent", ready: "accent", "в работе": "accent",
+    warn: "warn", "риск": "warn",
+    blocked: "bad", bad: "bad", fail: "bad", you: "bad", "блок": "bad", "твоё решение": "bad",
+    todo: "todo",
+  };
+  const PILL_RE = new RegExp("\\[(" + Object.keys(PILLK).join("|") + ")\\]", "gi");
+
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const pill = (k, label) => `<span class="rk-pill ${PILLK[k.toLowerCase()] || "todo"}">${esc(label || k)}</span>`;
+
+  // Inline markdown subset: **bold**, *italic*, ~~strike~~, `code`, [text](url), ![alt](src), [done]-style pills.
+  // Code spans stay literal; only the text between them is formatted.
+  function inline(s, pills = true) {
+    return String(s).split(/(`[^`]+`)/).map((part, i) => (i % 2 ? `<code>${esc(part.slice(1, -1))}</code>` : prose(part, pills))).join("");
+  }
+  function prose(s, pills) {
+    // Link and image tags are parked as placeholders, so bold/pill/ID rules never touch an href.
+    const keep = [];
+    const hold = (html) => `\u0000${keep.push(html) - 1}\u0000`;
+    let out = esc(s).replace(/\u0000/g, "");
+    out = out.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (m, alt, u) => (safeUrl(u) ? hold(`<img src="${u}" alt="${alt}">`) : alt));
+    out = out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, t, u) => (safeUrl(u) ? hold(`<a href="${u}">`) + t + hold("</a>") : t));
+    out = out.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+    out = out.replace(/(^|[^*])\*([^*\s][^*]*)\*/g, "$1<i>$2</i>");
+    out = out.replace(/~~([^~]+)~~/g, "<s>$1</s>");
+    if (pills) {
+      out = out.replace(PILL_RE, (_, k) => pill(k, k));
+      out = chipIds(out);
+    }
+    return out.replace(/\u0000(\d+)\u0000/g, (_, k) => keep[k]);
+  }
+  // Links and images: http(s), mailto, anchors and relative paths only (no javascript: and friends).
+  const safeUrl = (u) => !/[\x00-\x1f]/.test(u) && (/^(https?:|mailto:|#|\/|\.)/i.test(u) || !/^[a-z][a-z0-9+.-]*:/i.test(u));
+  // Ticket-style IDs (CHK-104, ENG-12) become mono chips, outside of tags only. UTF-8, SHA-256 & co. are not tickets.
+  const NOT_ID = /^(UTF|SHA|ISO|GPT|RFC|CVE|ES|MP|AES|RSA|TLS|SSL|HTTP|IPV|PEP|COVID|ECMA|RTX|GTX|ANSI)-/;
+  const chipIds = (html) => html.replace(/(<[^>]+>)|\b([A-Z][A-Z0-9]{1,9}-\d+)\b/g, (m, tag, id) => tag || (NOT_ID.test(id) ? id : `<span class="rk-id">${id}</span>`));
+
+  // Raw text of a component, whether written as text or inside <script type="text/plain">.
+  function rawText(el) {
+    const s = el.querySelector(':scope > script[type^="text/"]');
+    // md2html writes "<\/script" so a script tag inside the markdown cannot end the block early.
+    return (s ? s.textContent.replace(/<\\\/script/gi, "<\/script") : el.textContent);
+  }
+  const lines = (txt) => txt.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+  const cells = (l) => l.replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+
+  // "key: value" header lines at the top of a block (used by markdown fences).
+  function splitMeta(ls, keys) {
+    const meta = {};
+    while (ls.length) {
+      const m = ls[0].match(/^(\w+):\s*(.*)$/);
+      if (!m || !keys.includes(m[1].toLowerCase())) break;
+      meta[m[1].toLowerCase()] = m[2];
+      ls.shift();
+    }
+    return meta;
+  }
+
+
+  /* ---------- components ---------- */
+
+  const attr = (el, n, d = "") => (el.getAttribute(n) ?? d);
+  const numOf = (raw) => {
+    // "7 204" -> 7204, "1,234.5" -> 1234.5, "0,5" -> 0.5, "−3" -> -3
+    const m = String(raw).replace(/−/g, "-").match(/-?\d[\d\s  ]*(?:[.,]\d+)*/);
+    if (!m) return NaN;
+    let t = m[0].replace(/[\s  ]/g, "");
+    if (/,\d{3}(?!\d)/.test(t) && !/\./.test(t)) t = t.replace(/,/g, "");
+    else t = t.replace(/,/g, ".");
+    return Number(t);
+  };
+  const TAGRE = /\s*\[([a-zа-яё]+)\]\s*$/i;
+
+  function header(el) {
+    const eyebrow = attr(el, "eyebrow") || attr(el, "tag");
+    const title = attr(el, "title"), sub = attr(el, "sub") || attr(el, "period");
+    el.innerHTML = `<header class="rk-hd">${eyebrow ? `<span class="rk-eyebrow">${inline(eyebrow)}</span>` : ""}<h1>${inline(title)}</h1>${sub ? `<p class="lead">${inline(sub)}</p>` : ""}</header>`;
+  }
+
+  function stats(el, ls) {
+    // Lines "value | label | note", or child <rk-stat value label note|delta> elements.
+    let rows = [];
+    const kids = el.querySelectorAll("rk-stat");
+    if (kids.length) rows = [...kids].map((k) => [k.getAttribute("value"), k.getAttribute("label"), k.getAttribute("note") || k.getAttribute("delta") || ""]);
+    else rows = (ls || lines(rawText(el))).map(cells);
+    const nc = rows.length <= 4 ? rows.length : [5, 6, 9].includes(rows.length) ? 3 : 4;
+    el.innerHTML = `<div class="rk-fit" style="--n:${nc}">${rows.map(([v, l, n]) => {
+      let cls = "";
+      if (n && /^\+/.test(n)) cls = "good";
+      if (n && /^!/.test(n)) cls = "bad";
+      return `<div class="rk-panel"><span class="rk-big">${inline(v || "")}</span>${l ? `<span class="muted">${inline(l)}</span>` : ""}${n ? `<span class="rk-note ${cls}">${inline(n.replace(/^[+!]\s*/, ""))}</span>` : ""}</div>`;
+    }).join("")}</div>`;
+    countUp(el);
+  }
+
+  // Count-up for plain numbers ("~$38", "87%", "14 из 17": the first number only). It runs once, ~800 ms, and
+  // the text is put back exactly as written at the end (timer fallback, so a hidden tab never keeps a half value).
+  function countUp(root) {
+    if (!window.matchMedia || !matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+    root.querySelectorAll(".rk-big").forEach((b) => {
+      if (b.children.length) return;
+      const t = b.textContent, m = t.match(/^([^\d]*?)(\d+(?:[ \u00a0\u202f]\d{3})*(?:([.,])(\d+))?)(.*)$/s);
+      if (!m || /[a-zа-яё]/i.test(m[1])) return;
+      const [, pre, numStr, sep, frac = "", suf] = m;
+      const val = Number(numStr.replace(/[ \u00a0\u202f]/g, "").replace(",", "."));
+      if (!(val > 0)) return;
+      const grp = (numStr.match(/[ \u00a0\u202f]/) || [""])[0];
+      const fmtv = (v) => {
+        let [i, f] = v.toFixed(frac.length).split(".");
+        if (grp) i = i.replace(/\B(?=(\d{3})+(?!\d))/g, grp);
+        return pre + i + (f ? sep + f : "") + suf;
+      };
+      const t0 = performance.now(), dur = 800;
+      let done = false;
+      const tick = (now) => {
+        if (done) return;
+        const p = Math.min(1, (now - t0) / dur);
+        b.textContent = fmtv(val * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      setTimeout(() => { done = true; b.textContent = t; }, dur + 120);
+    });
+  }
+
+  function table(el, ls, pills = true) {
+    ls = (ls || lines(rawText(el))).filter((l) => !/^\|?\s*:?-{2,}/.test(l));
+    if (!ls.length) return;
+    const [head, ...rows] = ls.map(cells);
+    const compact = (el.getAttribute && el.getAttribute("kind") === "compact");
+    const NUM = /^[~$−+≈\d]|^-\d/;
+    const row = (r) => {
+      let pick = false;
+      if (/^\*\s+/.test(r[0] || "")) { pick = true; r = [r[0].replace(/^\*\s+/, ""), ...r.slice(1)]; }
+      const tds = head.map((_, i) => {
+        const c = r[i] || "";
+        const plain = c.replace(/\[[^\]]*\]|[*`]/g, "").trim();
+        const n = NUM.test(plain) && plain.length < 16 ? ' class="n"' : "";
+        return `<td${n}>${inline(c, pills)}</td>`;
+      }).join("");
+      return `<tr${pick ? ' class="pick"' : ""}>${tds}</tr>`;
+    };
+    el.innerHTML = `<div class="rk-tw"><table${head.length >= 4 && !compact ? ' class="wide"' : ""}><thead><tr>${head.map((h) => `<th>${inline(h, pills)}</th>`).join("")}</tr></thead><tbody>${rows.map(row).join("")}</tbody></table></div>`;
+  }
+
+  function callout(el, kind, title, bodyHtml) {
+    kind = (kind || el.getAttribute("kind") || "note").toLowerCase();
+    if (!["risk", "warn", "note", "ok", "verdict"].includes(kind)) kind = "note";
+    title = title ?? el.getAttribute("title");
+    let body = (bodyHtml ?? el.innerHTML).trim();
+    if (body && !/<(p|ul|ol|div|h\d)\b/i.test(body)) body = body.split(/\n\s*\n/).map((p) => `<p>${p.trim()}</p>`).join("");
+    el.innerHTML = `<div class="rk-callout ${kind}">${title ? `<span class="t">${inline(title)}</span>` : ""}${body}</div>`;
+  }
+
+  // "Label: 1,234.5" or "Label | 1e3". dp = decimals as written, so a value is shown the way it was given.
+  function parsePoints(ls) {
+    // "Пн: 3", "Opus: 52,5", "Итого: 7 204", "x: 1e3"; the value is shown as written
+    return ls.map((l) => {
+      l = l.replace(TAGRE, "");
+      const m = l.match(/^(.*?)\s*[:|]\s*([−-]?\d[\d\s\u00a0\u202f,.]*(?:e[+-]?\d+)?)\s*(\S*)$/i);
+      if (!m) return null;
+      const raw = m[2].trim(), value = /e/i.test(raw) ? Number(raw.replace(/,/g, "")) : numOf(raw);
+      return Number.isFinite(value) ? { label: m[1], value, txt: raw.replace(/-/g, "−") } : null;
+    }).filter(Boolean);
+  }
+
+  // "Label: 52,5 | 29,8": one value per series, each shown as written. "Label: 3" is a single series.
+  const NUMRE = "[−-]?\\d[\\d\\s\\u00a0\\u202f,.]*(?:e[+-]?\\d+)?";
+  const SERIES_LINE = new RegExp("^(.*?)\\s*[:|]\\s*(" + NUMRE + "(?:\\s*\\|\\s*" + NUMRE + ")*)\\s*(\\S*)$", "i");
+  function parseSeries(ls) {
+    return ls.map((l) => {
+      const m = l.replace(TAGRE, "").match(SERIES_LINE);
+      if (!m) return null;
+      const vals = m[2].split("|").map((x) => x.trim()).map((raw) => ({ value: /e/i.test(raw) ? Number(raw.replace(/,/g, "")) : numOf(raw), txt: raw.replace(/-/g, "−") })).filter((v) => Number.isFinite(v.value));
+      return vals.length ? { label: m[1], vals } : null;
+    }).filter(Boolean);
+  }
+
+  const BARK = { bad: "hi", good: "ok", alt: "s", warn: "w", accent: "ac", s1: "s1", s2: "s2", s3: "s3", s4: "s4", s5: "s5" };
+  const SERRE = /\s*\[([a-zа-яё]+\d?)\]\s*$/i;
+  // series index -> colour class: fixed order s1..s5, never cycled; anything past the fifth is the neutral --bar2
+  const sc = (i) => (i < 0 ? "" : i < 5 ? "s" + (i + 1) : "sx");
+  function hbarRows(ls) {
+    return ls.map((l) => {
+      let g;
+      if ((g = l.match(/^#{1,3}\s+(.*)$/))) return { group: g[1] };
+      let kind = "";
+      const t = l.match(SERRE);
+      if (t && BARK[t[1].toLowerCase()]) { kind = BARK[t[1].toLowerCase()]; l = l.replace(SERRE, ""); }
+      const m = l.match(/^(.*?)\s*[:|]\s*([^:|]*)$/);
+      if (!m) return null;
+      const value = numOf(m[2]);
+      return Number.isFinite(value) ? { label: m[1], raw: m[2].trim(), value, kind } : null;
+    }).filter(Boolean);
+  }
+
+  function chart(el, ls, meta) {
+    meta = meta || {};
+    const type = (meta.type || el.getAttribute("type") || "hbar").toLowerCase();
+    const title = meta.title || el.getAttribute("title") || "";
+    const unit = esc(meta.unit || el.getAttribute("unit") || "");
+    const note = meta.note || el.getAttribute("note") || "";
+    const legend = meta.legend || el.getAttribute("legend") || "";
+    const src = ls || (el.getAttribute("data") ? el.getAttribute("data").split(",") : lines(rawText(el)));
+    const head = title ? `<h3>${inline(title)}</h3>` : "";
+    const foot = (legend ? `<p class="rk-cap">${inline(legend)}</p>` : "") + (note ? `<p class="rk-cap">${inline(note)}</p>` : "");
+    if (type === "hbar") {
+      const rows = hbarRows(src);
+      if (!rows.length) return;
+      const data = rows.filter((r) => !r.group);
+      const max = Number(meta.max || el.getAttribute("max")) || Math.max(...data.map((r) => r.value), 0) || 1;
+      // Series mode: one colour per distinct row label, so Opus/Sonnet look the same in every group.
+      const sattr = String(meta.series ?? el.getAttribute("series") ?? "").trim();
+      let names = [];
+      if (sattr.toLowerCase() !== "off") {
+        if (sattr) names = sattr.split(",").map((x) => x.trim()).filter(Boolean);
+        else {
+          const seen = new Map(), uniq = [];
+          let g = -1;
+          rows.forEach((r) => {
+            if ("group" in r) { g++; return; }
+            const k = r.label.toLowerCase();
+            if (!seen.has(k)) { seen.set(k, new Set()); uniq.push(r.label); }
+            seen.get(k).add(g);
+          });
+          if (g >= 1 && [...seen.values()].some((v) => v.size >= 2)) names = uniq;
+        }
+      }
+      const sidx = (label) => names.findIndex((n) => n.toLowerCase() === label.toLowerCase());
+      let n = 0;
+      const used = new Set();
+      const body = rows.map((r) => {
+        if ("group" in r) return `<div class="g">${inline(r.group)}</div>`;
+        const w = Math.max(0, Math.min(100, (r.value / max) * 100));
+        const shown = unit && /^[\d\s.,−-]+$/.test(r.raw) ? r.raw + unit : r.raw;
+        let cls = names.length && r.kind === "s" ? "" : r.kind; // [alt] means nothing in series mode
+        if (!cls && names.length) { const i = sidx(r.label); if (i >= 0) { cls = sc(i); used.add(i); } }
+        return `<div class="rk-r"><span class="l">${inline(r.label)}</span><div class="b ${cls}" style="width:${w.toFixed(1)}%;--i:${Math.min(n++, 14)}"></div><span class="v">${inline(shown, false)}</span></div>`;
+      }).join("");
+      const legendRow = used.size ? `<div class="rk-leg">${[...used].sort((a, b) => a - b).map((i) => `<span><span class="rk-sw ${sc(i)}"></span>${esc(names[i])}</span>`).join("")}</div>` : "";
+      el.innerHTML = `<div class="rk-panel">${head}${legendRow}<div class="rk-bars">${body}</div>${foot}</div>`;
+      return;
+    }
+    const pts = parseSeries(src);
+    if (!pts.length) return;
+    if (pts.some((p) => p.vals.some((v) => v.value < 0))) {
+      // Bars grow from zero; a negative value would be drawn wrong, so say so instead of guessing.
+      callout(el, "warn", "График не нарисован.", "<p>rk-chart рисует значения от 0 и выше.</p>");
+      return;
+    }
+    const nS = Math.max(...pts.map((p) => p.vals.length)), multi = nS > 1;
+    const sattr = String(meta.series ?? el.getAttribute("series") ?? "").trim();
+    const names = Array.from({ length: nS }, (_, i) => (sattr.toLowerCase() !== "off" && sattr.split(",").map((x) => x.trim())[i]) || (multi ? `Серия ${i + 1}` : ""));
+    const max = Math.max(...pts.flatMap((p) => p.vals.map((v) => v.value)), 0) || 1;
+    const nice = niceMax(max);
+    const fmt = (v, dp) => (dp == null ? num(v) : v.toFixed(dp)) + unit;
+    const tl = [0, 0.25, 0.5, 0.75, 1].map((f) => fmt(nice * f));
+    const lastLab = multi && type === "line" ? Math.max(...pts.map((p) => (p.vals[p.vals.length - 1].txt + unit).length)) * 7.8 + 18 : 0;
+    const L = Math.max(36, Math.max(...tl.map((t) => t.length)) * 7.4 + 12), R = Math.max(20, lastLab), B = 36, T = 24, H = 250;
+    const slot = multi && type !== "line" ? Math.max(52, nS * 32 + 2) : multi ? 76 : 52; // grouped bars: two series x five groups still fit a half-width box
+    const W = Math.max(320, Math.round(L + R + pts.length * slot));
+    const pw = W - L - R, ph = H - B - T;
+    const grid = [0, 0.25, 0.5, 0.75, 1].map((f) => {
+      const y = T + ph - f * ph;
+      return `<line class="grid" x1="${L}" x2="${W - R}" y1="${y}" y2="${y}"/><text class="ax" x="${L - 8}" y="${y + 4}" text-anchor="end" font-size="12">${fmt(nice * f)}</text>`;
+    }).join("");
+    const step = pw / pts.length;
+    const yOf = (v) => T + ph - (v / nice) * ph;
+    const cx = (i) => L + step * i + step / 2;
+    const labels = pts.map((p, i) => `<text x="${cx(i)}" y="${H - 12}" text-anchor="middle" font-size="12" style="fill:var(--muted)">${esc(p.label)}</text>`).join("");
+    const vtxt = (v) => v.txt + unit;
+    const cls = (k) => (multi ? " " + sc(k) : "");
+    const per = pts.map(() => ""); // marks that belong to one x position (hover highlights them together)
+    let marks = "", avgNote = "";
+    if (type === "line") {
+      if (!multi) {
+        const xy = pts.map((p, i) => [cx(i), yOf(p.vals[0].value)]);
+        marks = `<polyline class="ln" pathLength="1" points="${xy.map((q) => q.join(",")).join(" ")}"/>`;
+        xy.forEach((q, i) => { per[i] += `<circle class="dot" cx="${q[0]}" cy="${q[1]}" r="5"/><text class="val" x="${q[0]}" y="${q[1] - 12}" text-anchor="middle" font-size="13">${vtxt(pts[i].vals[0])}</text>`; });
+      } else {
+        const ends = [];
+        for (let k = 0; k < nS; k++) {
+          const own = pts.map((p, i) => (p.vals[k] ? [cx(i), yOf(p.vals[k].value), i] : null)).filter(Boolean);
+          marks += `<polyline class="ln${cls(k)}" pathLength="1" points="${own.map((q) => q[0] + "," + q[1]).join(" ")}"/>`;
+          own.forEach((q) => { per[q[2]] += `<circle class="dot${cls(k)}" cx="${q[0]}" cy="${q[1]}" r="4.5"/>`; });
+          const last = own[own.length - 1];
+          if (last) ends.push({ x: last[0], y: last[1], t: vtxt(pts[last[2]].vals[k]) });
+        }
+        // direct labels sit at the right end of each line; nudge them apart when two lines finish close together
+        ends.sort((a, b) => a.y - b.y);
+        ends.forEach((e, i) => { if (i && e.y < ends[i - 1].ly + 15) e.ly = ends[i - 1].ly + 15; else e.ly = e.y; });
+        marks += ends.map((e) => `<text class="val" x="${e.x + 10}" y="${e.ly + 4}" font-size="13">${e.t}</text>`).join("");
+      }
+    } else {
+      // Peak bar and average line are derived here (single series only), so the agent never writes them.
+      const gw = multi ? Math.min(step * 0.88, nS * 56) : Math.min(64, step * 0.5), bw = (gw - (nS - 1) * 2) / nS;
+      const peak = Math.max(...pts.map((p) => p.vals[0].value));
+      pts.forEach((p, i) => {
+        p.vals.forEach((v, k) => {
+          const x = cx(i) - gw / 2 + k * (bw + 2), y = yOf(v.value);
+          const top = !multi && v.value === peak;
+          per[i] += `<rect class="bar${top ? " pk" : ""}${cls(k)}" x="${x}" y="${Math.min(y, T + ph)}" width="${bw}" height="${Math.max(0, T + ph - y)}" rx="3" style="--i:${Math.min(i, 14)}"/>`;
+          const lab = multi ? v.txt : vtxt(v); // grouped bars: the number only (unit is on the axis and in the tooltip); skipped when it would not fit
+          if (!multi || lab.length * 7.2 <= bw + 3) per[i] += `<text class="val" x="${x + bw / 2}" y="${y - 8}" text-anchor="middle" font-size="${multi ? 12 : 13}">${lab}</text>`;
+        });
+      });
+      const showAvg = !multi && pts.length >= 3 && !el.hasAttribute("noavg") && !meta.noavg;
+      if (showAvg) {
+        const avg = pts.reduce((a, p) => a + p.vals[0].value, 0) / pts.length, ay = yOf(avg);
+        marks += `<line class="avg" x1="${L}" x2="${W - R}" y1="${ay}" y2="${ay}"/>`;
+        avgNote = `Пунктир - среднее ${fmt(avg)}`;
+      }
+    }
+    // Tooltip text per x position, and a hit area for it: full column height, wider than any mark.
+    const tips = pts.map((p) => `<div class="th">${esc(p.label)}</div>` + p.vals.map((v, k) => `<div class="tr">${multi ? `<span class="rk-sw ${sc(k)}"></span><span>${esc(names[k])}</span>` : ""}<b>${esc(vtxt(v))}</b></div>`).join(""));
+    const aria = (p) => p.label + ": " + p.vals.map((v, k) => (multi ? names[k] + " " : "") + vtxt(v)).join(", ");
+    const cross = (i) => (type === "line" ? `<line class="cross" x1="${cx(i)}" x2="${cx(i)}" y1="${T}" y2="${T + ph}"/>` : "");
+    const pointsSvg = pts.map((p, i) => `<g class="pt"><rect class="hov" x="${L + step * i}" y="${T}" width="${step}" height="${ph}" rx="4"${type === "line" ? ' style="display:none"' : ""}/>${cross(i)}${per[i]}<rect class="hit" tabindex="0" role="img" aria-label="${esc(aria(p))}" data-i="${i}" x="${L + step * i}" y="${T}" width="${step}" height="${H - T}"/></g>`).join("");
+    const sum = (title || "График") + ": " + pts.map(aria).join("; ");
+    const legendRow = multi ? `<div class="rk-leg">${names.map((n, k) => `<span><span class="rk-sw ${sc(k)}"></span>${esc(n)}</span>`).join("")}</div>` : "";
+    el.innerHTML = `<div class="rk-panel">${head}${legendRow}<div class="rk-scroll"><div class="rk-cw" style="min-width:${W}px"><svg class="rk-svg" role="group" aria-label="${esc(sum)}" viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${Math.round(W * 1.8)}px;margin:0 auto">${grid}${marks}${labels}${pointsSvg}</svg><div class="rk-tip" role="tooltip" aria-hidden="true"></div></div></div>${foot}${avgNote ? `<p class="rk-cap">${avgNote}</p>` : ""}</div>`;
+    wireTip(el.querySelector(".rk-cw"), { W, T, L, step, tips });
+  }
+
+  // Hover / focus tooltip for SVG charts. The tooltip lives inside the chart box and is clamped to it.
+  function wireTip(wrap, info) {
+    const svg = wrap.querySelector("svg"), tip = wrap.querySelector(".rk-tip"), hits = [...svg.querySelectorAll(".hit")];
+    let cur = -1;
+    const hide = () => {
+      if (cur >= 0) hits[cur].parentNode.classList.remove("on");
+      cur = -1; tip.classList.remove("show");
+    };
+    const show = (i) => {
+      if (i === cur) return;
+      hide();
+      cur = i;
+      hits[i].parentNode.classList.add("on");
+      tip.innerHTML = info.tips[i];
+      tip.classList.add("show");
+      const sr = svg.getBoundingClientRect(), wr = wrap.getBoundingClientRect(), k = sr.width / info.W;
+      const x = sr.left - wr.left + (info.L + info.step * (i + 0.5)) * k, tw = tip.offsetWidth, th = tip.offsetHeight, ww = wrap.clientWidth;
+      let left = x + 14;
+      if (left + tw > ww - 4) left = x - 14 - tw;
+      tip.style.left = Math.max(4, Math.min(left, ww - tw - 4)) + "px";
+      tip.style.top = Math.max(4, Math.min(sr.top - wr.top + info.T * k, wr.height - th - 4)) + "px";
+    };
+    hits.forEach((h, i) => {
+      h.addEventListener("pointerenter", () => show(i));
+      h.addEventListener("pointermove", () => show(i));
+      h.addEventListener("pointerdown", () => show(i));
+      h.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") hide(); });
+      h.addEventListener("focus", () => show(i));
+      h.addEventListener("blur", hide);
+      h.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") hide();
+        else if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); hits[(i + (e.key === "ArrowRight" ? 1 : hits.length - 1)) % hits.length].focus(); }
+      });
+    });
+    document.addEventListener("pointerdown", (e) => { if (!wrap.contains(e.target)) hide(); });
+  }
+  // Axis ticks and the average: three to four significant digits, no float noise (0.07500000001 -> 0.075).
+  const num = (v) => (Number.isInteger(v) ? String(v) : String(+v.toPrecision(Math.abs(v) >= 1 ? 4 : 3)));
+  function niceMax(v) {
+    const p = Math.pow(10, Math.floor(Math.log10(v)));
+    for (const m of [1, 1.2, 1.6, 2, 2.4, 3, 4, 5, 6, 8, 10]) if (m * p >= v) return m * p; // quarters stay round
+    return 10 * p;
+  }
+
+  // Diagram: "A -> B: label" edges, "Name [db]" node kinds. Layered left-to-right layout.
+  const KIND = {
+    db: ["--good-soft", "--good"], queue: ["--warn-soft", "--warn"], ext: ["--panel", "--muted"],
+    user: ["--accent-soft", "--accent"], svc: ["--panel", "--bar2"], cache: ["--line", "--bar2"],
+  };
+  let dgId = 0; // unique marker ids per diagram instance
+  function diagram(el, ls, meta) {
+    dgId++;
+    meta = meta || {};
+    const title = meta.title || el.getAttribute("title") || "";
+    ls = ls || lines(rawText(el));
+    const nodes = new Map(), edges = [];
+    const node = (tok) => {
+      const m = tok.trim().match(/^(.*?)\s*(?:\[(\w+)\])?$/);
+      const name = m[1].trim();
+      if (!nodes.has(name)) nodes.set(name, { name, kind: "svc", out: [], inn: [] });
+      if (m[2]) nodes.get(name).kind = m[2].toLowerCase();
+      return nodes.get(name);
+    };
+    for (const l of ls) {
+      const m = l.match(/^(.+?)\s*(-->|->|<->|--)\s*(.+?)(?:\s*:\s*(.+))?$/);
+      if (m) {
+        const a = node(m[1]), b = node(m[3]);
+        const e = { a, b, label: m[4] || "", both: m[2] === "<->", plain: m[2] === "--" };
+        edges.push(e); a.out.push(e); b.inn.push(e);
+      } else node(l.replace(/:.*$/, ""));
+    }
+    if (!nodes.size) return;
+    // Layer = longest path from a source, ignoring back edges (DFS order).
+    const order = [...nodes.values()], state = new Map(), back = new Set();
+    const visit = (n) => {
+      state.set(n, 1);
+      for (const e of n.out) {
+        if (state.get(e.b) === 1) back.add(e);
+        else if (!state.get(e.b)) visit(e.b);
+      }
+      state.set(n, 2);
+    };
+    order.filter((n) => !n.inn.length).concat(order).forEach((n) => !state.get(n) && visit(n));
+    const layer = new Map();
+    const busy = new Set();
+    const depth = (n) => {
+      if (layer.has(n)) return layer.get(n);
+      if (busy.has(n)) return 0; // only reachable through an undetected cycle
+      busy.add(n);
+      let d = 0;
+      for (const e of n.inn) if (!back.has(e)) d = Math.max(d, depth(e.a) + 1);
+      busy.delete(n);
+      layer.set(n, d);
+      return d;
+    };
+    order.forEach((n) => depth(n));
+    const layers = [];
+    order.forEach((n) => (layers[layer.get(n)] ||= []).push(n));
+    // Two barycenter sweeps to reduce crossings.
+    const pos = new Map();
+    layers.forEach((L) => L.forEach((n, i) => pos.set(n, i)));
+    for (let pass = 0; pass < 2; pass++) {
+      for (let i = 1; i < layers.length; i++) {
+        layers[i].sort((x, y) => bary(x) - bary(y));
+        layers[i].forEach((n, k) => pos.set(n, k));
+      }
+    }
+    function bary(n) {
+      const ps = n.inn.filter((e) => !back.has(e)).map((e) => pos.get(e.a));
+      return ps.length ? ps.reduce((a, b) => a + b, 0) / ps.length : pos.get(n);
+    }
+    const NH = 46, VG = 30, CW = 8.2;
+    const widthOf = (n) => Math.max(96, n.name.length * CW + 32);
+    const labW = (e) => (e.label ? e.label.length * 7.3 + 18 : 0);
+    const dir = (meta.direction || el.getAttribute("direction") || (layers.length > 6 ? "down" : "right")).toLowerCase();
+    if (dir === "down") {
+      const out = layoutDown({ layers, edges, layer, back, widthOf, labW, NH });
+      return finishDiagram(el, title, out.W, out.H, out.paths, order, NH);
+    }
+    // Fan-out edges carry their label next to the target, fan-in edges next to the source,
+    // so labels sit on straight segments where the edges have already separated.
+    const fwd = edges.filter((e) => layer.get(e.b) > layer.get(e.a));
+    fwd.forEach((e) => (e.atTarget = e.a.out.length >= e.b.inn.length));
+    const gap = layers.map((_, i) => {
+      let need = 0;
+      for (const e of fwd) {
+        if (e.atTarget && layer.get(e.b) === i + 1) need = Math.max(need, labW(e));
+        if (!e.atTarget && layer.get(e.a) === i) need = Math.max(need, labW(e));
+      }
+      return Math.max(64, need + 44);
+    });
+    const colW = layers.map((L) => Math.max(...L.map(widthOf)));
+    const colH = layers.map((L) => L.length * NH + (L.length - 1) * VG);
+    const H = Math.max(...colH) + 40;
+    let x = 16;
+    layers.forEach((L, i) => {
+      const y0 = (H - colH[i]) / 2;
+      L.forEach((n, k) => { n.w = widthOf(n); n.x = x + (colW[i] - n.w) / 2; n.y = y0 + k * (NH + VG); });
+      x += colW[i] + (i < layers.length - 1 ? gap[i] : 0);
+    });
+    const W = x + 16;
+    const paths = edges.map((e) => {
+      const { a, b } = e;
+      const lw = labW(e);
+      let d, lx, ly;
+      if (layer.get(b) > layer.get(a)) {
+        const x1 = a.x + a.w, y1 = a.y + NH / 2, x2 = b.x - 4, y2 = b.y + NH / 2;
+        if (!lw) {
+          const mx = (x1 + x2) / 2;
+          d = `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
+        } else if (e.atTarget) {
+          const xe = x2 - lw - 22, cx = (x1 + xe) / 2;
+          d = `M${x1},${y1} C${cx},${y1} ${cx},${y2} ${xe},${y2} L${x2},${y2}`; lx = x2 - 12 - lw / 2; ly = y2;
+        } else {
+          const xs = x1 + lw + 22, cx = (xs + x2) / 2;
+          d = `M${x1},${y1} L${xs},${y1} C${cx},${y1} ${cx},${y2} ${x2},${y2}`; lx = x1 + 10 + lw / 2; ly = y1;
+        }
+      } else {
+        const x1 = a.x + a.w / 2, y1 = a.y + NH, x2 = b.x + b.w / 2, y2 = b.y + NH + 4, low = Math.max(y1, y2) + 36;
+        d = `M${x1},${y1} C${x1},${low} ${x2},${low} ${x2},${y2}`; lx = (x1 + x2) / 2; ly = low - 9;
+      }
+      const lab = lw ? `<rect x="${lx - lw / 2}" y="${ly - 10}" width="${lw}" height="20" rx="10" class="rk-labbox"/><text x="${lx}" y="${ly + 4}" text-anchor="middle" font-size="12" class="rk-labtxt">${esc(e.label)}</text>` : "";
+      return edgeOut(e, d, lab);
+    });
+    const extraH = edges.some((e) => layer.get(e.b) <= layer.get(e.a)) ? 46 : 0;
+    finishDiagram(el, title, W, H + extraH, paths, order, NH);
+  }
+
+  const edgeOut = (e, d, lab) => ({ p: `<path d="${d}" class="rk-edge" ${e.plain ? "" : `marker-end="url(#rka${dgId})"`} ${e.both ? `marker-start="url(#rkb${dgId})"` : ""}/>`, l: lab });
+  const labelBox = (lx, ly, lw, text) => `<rect x="${lx - lw / 2}" y="${ly - 10}" width="${lw}" height="20" rx="10" class="rk-labbox"/><text x="${lx}" y="${ly + 4}" text-anchor="middle" font-size="12" class="rk-labtxt">${esc(text)}</text>`;
+
+  // Top-down layout for deep graphs (flowcharts). Rows follow their parents so the main
+  // chain runs straight; labels get stacked slots so they never overlap; edges that skip
+  // rows run along a side rail instead of cutting through nodes.
+  function layoutDown({ layers, edges, layer, back, widthOf, labW, NH }) {
+    const span = (e) => layer.get(e.b) - layer.get(e.a);
+    const rail = edges.filter((e) => !back.has(e) && span(e) > 1);
+    const left = edges.filter((e) => back.has(e) || span(e) < 1);
+    const railNodes = new Set(rail.flatMap((e) => [e.a, e.b]));
+    const GAPX = 44;
+    layers.forEach((L, i) => {
+      L.forEach((n) => (n.w = widthOf(n)));
+      const want = (n) => {
+        const ps = n.inn.filter((e) => span(e) === 1 && !back.has(e)).map((e) => e.a.x + e.a.w / 2);
+        return ps.length ? ps.reduce((a, b) => a + b, 0) / ps.length : null;
+      };
+      if (i === 0) { let x = 0; L.forEach((n) => { n.x = x; x += n.w + GAPX; }); return; }
+      // Siblings that continue the chain take the slot under their parent; leaves go to the side.
+      const leaf = (n) => (n.out.length ? 0 : 1);
+      L.sort((a, b) => (railNodes.has(a) - railNodes.has(b)) || ((want(a) ?? 1e9) - (want(b) ?? 1e9)) || (leaf(a) - leaf(b)));
+      let cursor = -1e9;
+      L.forEach((n) => {
+        const w = want(n);
+        const x = (w === null ? cursor + GAPX : w - n.w / 2);
+        n.x = Math.max(x, cursor === -1e9 ? x : cursor + GAPX);
+        cursor = n.x + n.w;
+      });
+    });
+    // Label slots per gap: greedy rows so boxes never overlap.
+    const gaps = layers.map(() => []);
+    edges.filter((e) => span(e) === 1 && !back.has(e) && e.label).forEach((e) => {
+      const g = gaps[layer.get(e.a)], lw = labW(e);
+      const cx = (e.a.x + e.a.w / 2 + e.b.x + e.b.w / 2) / 2;
+      let slot = 0;
+      while (g.some((o) => o.slot === slot && Math.abs(o.cx - cx) < (o.lw + lw) / 2 + 8)) slot++;
+      g.push({ e, cx, lw, slot });
+    });
+    let y = 16;
+    layers.forEach((L, i) => {
+      L.forEach((n) => (n.y = y));
+      const slots = gaps[i].length ? Math.max(...gaps[i].map((o) => o.slot)) + 1 : 0;
+      y += NH + Math.max(42, 22 + slots * 26);
+    });
+    const leftW = left.length ? Math.max(...left.map(labW), 0) + 40 + left.length * 14 : 0;
+    const allNodes = layers.flat(), labs = gaps.flat();
+    // Shift nodes and their branch labels together; the bounds include the labels, so none is cut off.
+    const minX = Math.min(...allNodes.map((n) => n.x), ...labs.map((o) => o.cx - o.lw / 2));
+    const dx = 16 + leftW - minX;
+    allNodes.forEach((n) => (n.x += dx));
+    labs.forEach((o) => (o.cx += dx));
+    const maxRight = Math.max(...allNodes.map((n) => n.x + n.w), ...labs.map((o) => o.cx + o.lw / 2));
+    const railLab = Math.max(0, ...rail.map(labW));
+    const paths = [];
+    gaps.forEach((g) => g.forEach((o) => {
+      const { e } = o, x1 = e.a.x + e.a.w / 2, y1 = e.a.y + NH, x2 = e.b.x + e.b.w / 2, y2 = e.b.y - 4;
+      const ly = y1 + 21 + o.slot * 26, lx = o.cx; // branch labels float at the curve's midpoint, clear of the main line
+      paths.push(edgeOut(e, `M${x1},${y1} C${x1},${(y1 + y2) / 2} ${x2},${(y1 + y2) / 2} ${x2},${y2}`, labelBox(lx, ly, o.lw, e.label)));
+    }));
+    edges.filter((e) => span(e) === 1 && !back.has(e) && !e.label).forEach((e) => {
+      const x1 = e.a.x + e.a.w / 2, y1 = e.a.y + NH, x2 = e.b.x + e.b.w / 2, y2 = e.b.y - 4;
+      paths.push(edgeOut(e, `M${x1},${y1} C${x1},${(y1 + y2) / 2} ${x2},${(y1 + y2) / 2} ${x2},${y2}`, ""));
+    });
+    let W = maxRight + 16;
+    rail.forEach((e, r) => {
+      const rx = maxRight + railLab + 40 + r * 14, ay = e.a.y + NH / 2 + (r % 3 - 1) * 6, by = e.b.y + NH / 2 + (r % 3 - 1) * 6;
+      const lw = labW(e);
+      W = Math.max(W, rx + 16);
+      paths.push(edgeOut(e, `M${e.a.x + e.a.w},${ay} H${rx} V${by} H${e.b.x + e.b.w + 4}`, lw ? labelBox(e.a.x + e.a.w + 12 + lw / 2, ay, lw, e.label) : ""));
+    });
+    left.forEach((e, r) => {
+      const lx = 16 + leftW - 24 - r * 14, ay = e.a.y + NH / 2, by = e.b.y + NH / 2, lw = labW(e);
+      paths.push(edgeOut(e, `M${e.a.x},${ay} H${lx} V${by} H${e.b.x - 4}`, lw ? labelBox(Math.max(16 + lw / 2, e.a.x - 12 - lw / 2), ay, lw, e.label) : ""));
+    });
+    return { W, H: y - 30, paths };
+  }
+
+  function finishDiagram(el, title, W, H, paths, order, NH) {
+    const boxes = order.map((n) => {
+      const [fill, stroke] = KIND[n.kind] || KIND.svc;
+      const st = `style="fill:var(${fill});stroke:var(${stroke})" stroke-width="1.6"`;
+      const shape = n.kind === "db"
+        ? `<path d="M${n.x},${n.y + 8} a${n.w / 2},8 0 0,0 ${n.w},0 v${NH - 16} a${n.w / 2},8 0 0,1 ${-n.w},0 z" ${st}/><ellipse cx="${n.x + n.w / 2}" cy="${n.y + 8}" rx="${n.w / 2}" ry="8" ${st}/>`
+        : `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${NH}" rx="${n.kind === "user" ? 23 : 8}" ${st} ${n.kind === "ext" ? 'stroke-dasharray="5 4"' : ""}/>`;
+      return `${shape}<text x="${n.x + n.w / 2}" y="${n.y + NH / 2 + 5 + (n.kind === "db" ? 3 : 0)}" text-anchor="middle" font-size="14" class="rk-nt">${esc(n.name)}</text>`;
+    });
+    const defs = `<defs><marker id="rka${dgId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--bar2)"/></marker><marker id="rkb${dgId}" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--bar2)"/></marker></defs>`;
+    el.innerHTML = `<div class="rk-panel rk-diagram">${title ? `<h3>${inline(title)}</h3>` : ""}<div class="rk-scroll"><svg class="rk-svg" role="img" aria-label="${esc((title || "Схема") + ": " + order.map((n) => n.name).join(", "))}" viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;min-width:${W}px;margin:0 auto">${defs}${paths.map((x) => x.p).join("")}${boxes.join("")}${paths.map((x) => x.l).join("")}</svg></div></div>`;
+  }
+
+
+  function steps(el, ls) {
+    ls = ls || lines(rawText(el));
+    el.innerHTML = `<ol class="rk-steps">${ls.map((l) => {
+      const [t, d, ...meta] = cells(l.replace(/^\d+[.)]\s*/, ""));
+      return `<li class="rk-step"><div class="body"><h3>${inline(t)}</h3>${d ? `<p>${inline(d)}</p>` : ""}${meta.length ? `<span class="meta">${inline(meta.join(" | "))}</span>` : ""}</div></li>`;
+    }).join("")}</ol>`;
+  }
+
+  // Board: "ID | title | column" items, drag between columns, export as markdown.
+  function board(el, ls, meta) {
+    meta = meta || {};
+    const INBOX = "Входящие";
+    const cols = (meta.columns || el.getAttribute("columns") || "Сейчас,Дальше,Потом").split(",").map((s) => s.trim()).filter(Boolean);
+    const items = (ls || lines(rawText(el))).map(cells).filter((c) => !/^id$/i.test(c[0]))
+      .map(([id, title, col]) => ({ id, title: title || "", col }));
+    const hasInbox = items.some((i) => !i.col || !cols.includes(i.col));
+    const lanes = (hasInbox ? [INBOX] : []).concat(cols);
+    items.forEach((i) => { if (!lanes.includes(i.col)) i.col = lanes[0]; });
+    const title = meta.title || el.getAttribute("title") || "";
+    const laneHtml = (c, cls = "") => `<div class="rk-lane ${cls}" data-col="${esc(c)}" role="group" aria-label="Колонка: ${esc(c)}"><div class="lh"><span>${esc(c)}</span><span class="c"></span></div></div>`;
+    el.innerHTML = `<div class="rk-board"><div class="bar"><h3>${inline(title)}</h3><button type="button" class="rk-btn">Экспорт в Markdown</button></div>
+<div class="hint">Перетащи карточку или нажми на неё, а потом на колонку. С клавиатуры: фокус на карточке и клавиши 1-${lanes.length}.</div>
+${hasInbox ? laneHtml(INBOX, "inbox") : ""}<div class="lanes" style="--n:${cols.length}">${cols.map((c) => laneHtml(c)).join("")}</div>
+<div class="rk-toast" role="status" aria-live="polite"></div><textarea class="rk-out" readonly aria-label="Markdown"></textarea></div>`;
+    const laneEl = (c) => el.querySelector(`.rk-lane[data-col="${CSS.escape(c)}"]`);
+    let dragging = null, picked = null;
+    const pick = (d) => { picked?.classList.remove("pick"); picked = picked === d ? null : d; picked?.classList.add("pick"); };
+    items.forEach((it) => {
+      const d = document.createElement("div");
+      d.className = "rk-item"; d.draggable = true; d.tabIndex = 0; d.dataset.id = it.id;
+      d.innerHTML = `<div class="id">${esc(it.id)}</div>${inline(it.title)}`;
+      d.setAttribute("aria-label", `${it.id} ${d.textContent.slice(it.id.length).trim()}`);
+      // .lift is on while the browser takes the drag picture (so the ghost looks raised); the original dims right after
+      d.addEventListener("dragstart", () => { dragging = d; d.classList.add("lift"); setTimeout(() => { d.classList.remove("lift"); d.classList.add("drag"); }); });
+      d.addEventListener("dragend", () => { d.classList.remove("drag", "lift"); dragging = null; count(); });
+      // Touch screens have no HTML drag and drop: tap a card, then tap the column it goes to.
+      d.addEventListener("click", (e) => { e.stopPropagation(); pick(d); });
+      // Keyboard: number keys move the focused card to that column (1 = first column on screen).
+      d.addEventListener("keydown", (e) => {
+        const all = [...el.querySelectorAll(".rk-lane")], n = Number(e.key);
+        if (n >= 1 && n <= all.length) { all[n - 1].appendChild(d); d.focus(); count(); }
+        else if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(d); }
+      });
+      laneEl(it.col).appendChild(d);
+    });
+    el.querySelectorAll(".rk-lane").forEach((lane) => {
+      lane.addEventListener("click", () => { if (picked) { lane.appendChild(picked); pick(picked); count(); } });
+      lane.addEventListener("dragover", (e) => { e.preventDefault(); lane.classList.add("over"); });
+      lane.addEventListener("dragleave", () => lane.classList.remove("over"));
+      lane.addEventListener("drop", (e) => {
+        e.preventDefault(); lane.classList.remove("over");
+        if (!dragging) return;
+        const after = [...lane.querySelectorAll(".rk-item:not(.drag)")].find((c) => e.clientY < c.getBoundingClientRect().top + c.offsetHeight / 2);
+        lane.insertBefore(dragging, after || null);
+      });
+    });
+    function count() { el.querySelectorAll(".rk-lane").forEach((l) => (l.querySelector(".c").textContent = l.querySelectorAll(".rk-item").length)); }
+    count();
+    const toast = el.querySelector(".rk-toast");
+    el.querySelector(".rk-btn").addEventListener("click", () => {
+      const md = [...el.querySelectorAll(".rk-lane")].map((l) =>
+        `## ${l.dataset.col}\n` + [...l.querySelectorAll(".rk-item")].map((i) => `- ${i.dataset.id} ${i.textContent.slice(i.dataset.id.length).trim()}`).join("\n")).join("\n\n");
+      const out = el.querySelector(".rk-out");
+      out.style.display = "block"; out.value = md;
+      const say = (t) => { toast.textContent = t; clearTimeout(toast.t); toast.t = setTimeout(() => (toast.textContent = ""), 2500); };
+      (navigator.clipboard ? navigator.clipboard.writeText(md).then(() => say("Скопировано"), () => say("Выдели текст и скопируй вручную")) : Promise.resolve(say("Выдели текст и скопируй вручную")));
+    });
+  }
+
+
+  /* ---------- report blocks ---------- */
+
+  const kindOf = (s) => { const m = String(s).match(PILL_RE); return m ? PILLK[m[0].slice(1, -1).toLowerCase()] : ""; };
+
+  // Top-of-report status: big verdict line, optional "От тебя:" row, up to 5 bullets.
+  function status(el) {
+    const state = ["ok", "warn", "fail"].includes(attr(el, "state")) ? attr(el, "state") : "ok";
+    const you = attr(el, "you");
+    const [first, ...rest] = lines(rawText(el));
+    const EM = { ok: "✅", warn: "⚠️", fail: "❌" };
+    el.innerHTML = `<div class="rk-panel rk-stripe rk-status ${state}"><div class="main"><span class="em" aria-hidden="true">${EM[state]}</span><span>${inline(first || "")}</span></div>${
+      you ? `<div class="you"><b>От тебя:</b> ${inline(you)}</div>` : ""}${
+      rest.length ? `<ul>${rest.slice(0, 5).map((l) => `<li>${inline(l.replace(/^[-*•]\s+/, ""))}</li>`).join("")}</ul>` : ""}</div>`;
+  }
+
+  // Options as cards: first line is the header, "*" marks the recommended row (shown first).
+  function options(el) {
+    const ls = lines(rawText(el)).filter((l) => !/^\|?\s*:?-{2,}/.test(l));
+    if (ls.length < 2) return;
+    const [head, ...rows] = ls.map(cells);
+    const items = rows.map((r) => {
+      const rec = /^\*\s+/.test(r[0] || "");
+      return { rec, r: rec ? [r[0].replace(/^\*\s+/, ""), ...r.slice(1)] : r };
+    });
+    items.sort((a, b) => b.rec - a.rec);
+    const nc = items.length === 4 ? 2 : Math.min(items.length, 3);
+    el.innerHTML = `<div class="rk-optgrid rk-fit" style="--n:${nc}">${items.map(({ rec, r }) => `<div class="rk-opt rk-hov${rec ? " rec" : ""}">${rec ? '<span class="rk-badge">рекомендую</span>' : ""}<h3>${inline(r[0] || "")}</h3>${
+      head.slice(1).map((h, i) => (r[i + 1] ? `<div class="f"><span class="k">${inline(h, false)}</span><div>${inline(r[i + 1])}</div></div>` : "")).join("")}</div>`).join("")}</div>`;
+  }
+
+  // Images: relative path, http(s) or data:image/. Anything else (javascript:, file:...) is dropped.
+  const safeImg = (u) => /^data:image\/(png|jpe?g|gif|webp|avif|svg\+xml)[;,]/i.test(u) || (!/^data:/i.test(u) && safeUrl(u) && !/^mailto:/i.test(u));
+
+  let lb = null;
+  function lightbox(items, start) {
+    let i = start;
+    if (lb) lb.remove();
+    lb = document.createElement("div");
+    lb.className = "rk-lb"; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true"); lb.setAttribute("aria-label", "Просмотр изображения");
+    lb.innerHTML = `<button type="button" class="x" aria-label="Закрыть">×</button>${items.length > 1 ? '<button type="button" class="p" aria-label="Назад">‹</button><button type="button" class="nx" aria-label="Вперёд">›</button>' : ""}<img alt=""><div class="cap"></div>`;
+    const prevFocus = document.activeElement;
+    const show = () => { lb.querySelector("img").src = items[i].src; lb.querySelector("img").alt = items[i].cap; lb.querySelector(".cap").textContent = items[i].cap; };
+    const go = (d) => { i = (i + d + items.length) % items.length; show(); };
+    const close = () => {
+      document.removeEventListener("keydown", key, true);
+      const gone = lb;
+      lb = null;
+      prevFocus?.focus?.();
+      if (window.matchMedia && matchMedia("(prefers-reduced-motion: no-preference)").matches) { gone.classList.add("out"); setTimeout(() => gone.remove(), 180); }
+      else gone.remove();
+    };
+    const key = (e) => {
+      if (e.key === "Escape") { e.preventDefault(); close(); }
+      else if (e.key === "ArrowRight" && items.length > 1) go(1);
+      else if (e.key === "ArrowLeft" && items.length > 1) go(-1);
+    };
+    lb.addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      if (b?.classList.contains("p")) go(-1);
+      else if (b?.classList.contains("nx")) go(1);
+      else close();
+    });
+    document.addEventListener("keydown", key, true);
+    document.body.appendChild(lb);
+    show();
+    lb.querySelector(".x").focus();
+  }
+  const frame = (src, alt, idx) => `<button type="button" class="rk-frame" data-i="${idx}" aria-label="Открыть: ${esc(alt)}"><img src="${esc(src)}" alt="${esc(alt)}"${/^data:/i.test(src) ? "" : ' loading="lazy"'}></button>`;
+
+  function gallery(el) {
+    const cols = Math.min(6, Math.max(1, parseInt(attr(el, "cols", "3"), 10) || 3));
+    const items = lines(rawText(el)).map((l) => {
+      const k = l.indexOf("|");
+      const src = (k < 0 ? l : l.slice(0, k)).trim(), cap = k < 0 ? "" : l.slice(k + 1).trim();
+      return safeImg(src) ? { src, cap } : null;
+    }).filter(Boolean);
+    el.innerHTML = `<div class="rk-gal" style="--cols:${cols}">${items.map((it, i) => `<figure class="rk-fig">${frame(it.src, it.cap || `Изображение ${i + 1}`, i)}${it.cap ? `<figcaption class="rk-cap">${inline(it.cap)}</figcaption>` : ""}</figure>`).join("")}</div>`;
+    el.querySelectorAll(".rk-frame").forEach((b) => b.addEventListener("click", () => lightbox(items.map((x) => ({ src: x.src, cap: x.cap.replace(/[`*]/g, "") })), Number(b.dataset.i))));
+  }
+
+  function compare(el) {
+    const bl = attr(el, "before", "Было"), al = attr(el, "after", "Стало");
+    const rows = lines(rawText(el)).map((l) => {
+      const [a, b, ...c] = l.split("|").map((s) => s.trim());
+      return a && b && safeImg(a) && safeImg(b) ? { a, b, cap: c.join(" | ") } : null;
+    }).filter(Boolean);
+    const flat = [];
+    rows.forEach((r) => { flat.push({ src: r.a, cap: `${bl}${r.cap ? ": " + r.cap.replace(/[`*]/g, "") : ""}` }, { src: r.b, cap: `${al}${r.cap ? ": " + r.cap.replace(/[`*]/g, "") : ""}` }); });
+    el.innerHTML = `<div class="rk-cmp">${rows.map((r, i) => `<div class="rk-pair"><div class="two"><div class="side"><span class="lab">${esc(bl)}</span>${frame(r.a, `${bl}: ${r.cap || i + 1}`, i * 2)}</div><div class="side"><span class="lab">${esc(al)}</span>${frame(r.b, `${al}: ${r.cap || i + 1}`, i * 2 + 1)}</div></div>${r.cap ? `<span class="rk-cap">${inline(r.cap)}</span>` : ""}</div>`).join("")}</div>`;
+    el.querySelectorAll(".rk-frame").forEach((b) => b.addEventListener("click", () => lightbox(flat, Number(b.dataset.i))));
+  }
+
+  // Gauge: fills (drawn largest first, so smaller ones stay visible on top) and vertical marks.
+  const GAUGEC = { bad: "var(--bad-soft)", good: "var(--good)", accent: "var(--accent)", warn: "var(--warn)", alt: "var(--bar2)", mark: "var(--fg)" };
+  function gauge(el) {
+    const title = attr(el, "title"), unit = attr(el, "unit"), note = attr(el, "note");
+    const rows = lines(rawText(el)).map((l) => {
+      const m = l.match(/^(.*):\s*([−-]?\d[\d\s .,]*)\s*(?:\[([a-zа-яё]+)\])?\s*$/i);
+      if (!m) return null;
+      const v = numOf(m[2]);
+      const k = (m[3] || "accent").toLowerCase();
+      return Number.isFinite(v) ? { label: m[1].trim(), raw: m[2].trim(), v, k: GAUGEC[k] ? k : "accent" } : null;
+    }).filter(Boolean);
+    if (!rows.length) return;
+    const max = Number(attr(el, "max")) || Math.max(...rows.map((r) => r.v));
+    const pct = (v) => Math.max(0, Math.min(100, (v / max) * 100)).toFixed(1);
+    const fills = rows.filter((r) => r.k !== "mark").sort((a, b) => b.v - a.v);
+    const sum = `${title || "Шкала"}: ` + rows.map((r) => `${r.label} ${r.raw}${unit}${r.k === "mark" ? " (отметка)" : ""}`).join(", ");
+    el.innerHTML = `<div class="rk-panel rk-gauge">${title ? `<span class="rk-eyebrow">${inline(title)}</span>` : ""}<div class="track" role="img" aria-label="${esc(sum)}">${
+      fills.map((r, i) => `<div class="fill" style="width:${pct(r.v)}%;background:${GAUGEC[r.k]};--i:${i}"></div>`).join("")}${
+      rows.filter((r) => r.k === "mark").map((r) => `<div class="mark" style="left:min(calc(${pct(r.v)}% - 1px),calc(100% - 2px))"></div>`).join("")}</div><div class="leg">${
+      rows.map((r) => `<span><span class="rk-sw" style="background:${GAUGEC[r.k]}"></span>${inline(r.label)}${r.label.includes(r.raw) ? "" : ` <b class="num">${esc(r.raw)}${esc(unit)}</b>`}</span>`).join("")}</div>${
+      note ? `<p class="muted" style="font-size:14px">${inline(note)}</p>` : ""}</div>`;
+  }
+
+  function checklist(el) {
+    const title = attr(el, "title");
+    const items = lines(rawText(el)).map((l) => {
+      const m = l.match(/^\[([ xX!])\]\s*(.*)$/);
+      return m ? { s: m[1].toLowerCase(), t: m[2] } : { s: " ", t: l };
+    });
+    const key = "rk-cl:" + location.pathname + "|" + title;
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(key) || "{}") || {}; } catch (e) { saved = {}; }
+    el.innerHTML = `<div class="rk-panel rk-cl"><div class="top">${title ? `<h3>${inline(title)}</h3>` : "<span></span>"}<span class="r"><span class="cnt" aria-live="polite"></span><button type="button" class="rk-mini rk-noprint">Сбросить</button></span></div><ul class="rk-list">${items.map((it, i) =>
+      `<li><label class="rk-ci${it.s === "!" ? " blocked" : ""}"><input type="checkbox" data-i="${i}"${(it.t in saved ? saved[it.t] : it.s === "x") ? " checked" : ""}><span>${it.s === "!" ? "! " : ""}${inline(it.t)}</span></label></li>`).join("")}</ul></div>`;
+    const boxes = [...el.querySelectorAll("input")];
+    const upd = () => (el.querySelector(".cnt").textContent = `${boxes.filter((b) => b.checked).length} из ${boxes.length}`);
+    boxes.forEach((b) => b.addEventListener("change", () => {
+      upd();
+      if (b.checked) { b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); b.addEventListener("animationend", () => b.classList.remove("pop"), { once: true }); }
+      try {
+        const o = {}; boxes.forEach((x) => (o[items[x.dataset.i].t] = x.checked));
+        localStorage.setItem(key, JSON.stringify(o));
+      } catch (e) { /* storage blocked: the list still works, it just won't be remembered */ }
+    }));
+    el.querySelector(".rk-mini").addEventListener("click", () => {
+      boxes.forEach((b) => (b.checked = items[b.dataset.i].s === "x"));
+      try { localStorage.removeItem(key); } catch (e) { /* storage blocked */ }
+      upd();
+    });
+    upd();
+  }
+
+  function cards(el) {
+    // Lines "title | text | meta" -> card grid; [kind] tag colors the card's left edge.
+    const rows = lines(rawText(el)).map((l) => { const t = l.match(TAGRE); return { k: t ? kindOf(t[0].trim()) : "", c: cells(l.replace(TAGRE, "")) }; });
+    const n = rows.length <= 3 ? rows.length : rows.length === 4 ? 2 : 3;
+    el.innerHTML = `<div class="rk-fit" style="--n:${n}">${rows.map(({ k, c: [t, x, m] }) =>
+      `<div class="rk-panel rk-card rk-hov${k ? ` rk-stripe" style="--c:var(--${k === "todo" ? "bar2" : k})` : ""}"><h3>${inline(t || "")}</h3>${x ? `<p>${inline(x)}</p>` : ""}${m ? `<span class="m">${inline(m)}</span>` : ""}</div>`).join("")}</div>`;
+  }
+
+  function toc(el) {
+    // Contents of every top-level h2 on the page, plus a print button. Ids are added to the h2s.
+    const hs = [...document.querySelectorAll("h2")].filter((h) => !h.closest("rk-cols,rk-callout,rk-board"));
+    hs.forEach((h, i) => { if (!h.id) h.id = "s" + (i + 1); });
+    el.innerHTML = `<nav class="rk-panel rk-toc rk-noprint" aria-label="Содержание"><div class="top"><span class="rk-eyebrow">${inline(attr(el, "title", "Содержание"))}</span><button type="button" class="rk-mini">Распечатать</button></div><ol>${
+      hs.map((h) => `<li><a href="#${esc(h.id)}">${esc(h.textContent.trim())}</a></li>`).join("")}</ol></nav>`;
+    const pb = el.querySelector(".rk-mini");
+    let framed = true; try { framed = window.self !== window.top; } catch (e) { /* cross-origin frame */ }
+    if (framed) pb.remove(); // artifacts and previews run in a frame where print() does nothing
+    else pb.addEventListener("click", () => window.print());
+  }
+
+  function timeline(el) {
+    const DOT = { good: "var(--good)", accent: "var(--accent)", warn: "var(--warn)", bad: "var(--bad)", todo: "var(--bar2)" };
+    const rows = lines(rawText(el)).map((l) => ({ k: kindOf(l) || "accent", c: cells("|" + l) }));
+    el.innerHTML = `<div class="rk-panel"><ol class="rk-tl">${rows.map(({ k, c: [d, t, ...x] }) =>
+      `<li style="--dot:${DOT[k]}"><span class="d">${inline(d || "", false)}</span>${t ? `<span class="t">${inline(t)}</span>` : ""}${x.length ? `<span class="x">${inline(x.join(" | "))}</span>` : ""}</li>`).join("")}</ol></div>`;
+  }
+
+  const FIND = [[/дефект|риск|bad|ошибк|баг/i, "t-bad"], [/правило|утечка|note|заметк|внимание/i, "t-mid"], [/в порядке|ok|учёт|учет|готово/i, "t-ok"]];
+  function findings(el) {
+    const rows = lines(rawText(el)).map((l) => { const k = l.indexOf("|"); return k < 0 ? ["", l] : [l.slice(0, k).trim(), l.slice(k + 1).trim()]; });
+    el.innerHTML = `<div class="rk-panel" style="gap:12px">${rows.map(([t, x]) => {
+      const cls = (FIND.find(([re]) => re.test(t)) || [0, "t-mu"])[1];
+      return `<div class="rk-fi"><span class="tag ${cls}">${esc(t)}</span><p>${inline(x)}</p></div>`;
+    }).join("")}</div>`;
+  }
+
+  /* ---------- markdown renderer (for .md written by the agent) ---------- */
+
+  const FENCES = {
+    chart: (ls) => { const m = splitMeta(ls, ["title", "type", "unit"]); return mk(chart, ls, m); },
+    diagram: (ls) => { const m = splitMeta(ls, ["title"]); return mk(diagram, ls, m); },
+    board: (ls) => { const m = splitMeta(ls, ["title", "columns"]); return mk(board, ls, m); },
+    stats: (ls) => mk(stats, ls),
+    steps: (ls) => mk(steps, ls),
+  };
+  function mk(fn, ls, meta) { const d = document.createElement("div"); fn(d, ls, meta); return d; }
+
+  // A list and the lists nested under its items (deeper indent = child of the previous item).
+  const LI = /^(\s*)([-*+]|\d+[.)])\s+(.*)$/;
+  function list(L, i, plain) {
+    const base = L[i].match(LI)[1].length, ordered = /^\d/.test(L[i].match(LI)[2]), items = [];
+    while (i < L.length) {
+      const m = L[i].match(LI);
+      if (!m || m[1].length < base) break;
+      if (m[1].length > base && items.length) {
+        const sub = list(L, i, plain);
+        items[items.length - 1] = items[items.length - 1].replace(/<\/li>$/, sub.html + "</li>");
+        i = sub.i; continue;
+      }
+      let t = m[3]; i++;
+      while (i < L.length && /^\s{2,}\S/.test(L[i]) && !LI.test(L[i])) t += " " + L[i++].trim();
+      const task = t.match(/^\[([ xX])\]\s+(.*)$/);
+      items.push(task ? `<li class="rk-task"><input type="checkbox" ${task[1] !== " " ? "checked" : ""}>${inline(task[2], !plain)}</li>` : `<li>${inline(t, !plain)}</li>`);
+    }
+    return { html: `<${ordered ? "ol" : "ul"}>${items.join("")}</${ordered ? "ol" : "ul"}>`, i };
+  }
+
+  function renderMarkdown(src, plain) {
+    const root = document.createElement("div");
+    const L = src.replace(/\r/g, "").split("\n");
+    let i = 0, para = [];
+    const flush = () => {
+      if (para.length) { const p = document.createElement("p"); p.innerHTML = inline(para.join(" "), !plain); root.appendChild(p); para = []; }
+    };
+    const add = (html) => { const t = document.createElement("template"); t.innerHTML = html; root.appendChild(t.content); };
+    while (i < L.length) {
+      const line = L[i];
+      let m;
+      if ((m = line.match(/^```\s*(\w*)/))) {
+        flush();
+        const lang = m[1].toLowerCase(), body = [];
+        i++;
+        while (i < L.length && !/^```/.test(L[i])) body.push(L[i++]);
+        i++;
+        if (!plain && FENCES[lang]) root.appendChild(FENCES[lang](body.map((s) => s.trim()).filter(Boolean)));
+        else add(`<pre><code${lang ? ` class="language-${lang}"` : ""}>${esc(body.join("\n"))}</code></pre>`);
+        continue;
+      }
+      if ((m = line.match(/^(#{1,6})\s+(.*)$/))) {
+        flush();
+        if (!plain && m[1].length === 1 && !root.querySelector("rk-header")) {
+          const h = document.createElement("rk-header"); h.setAttribute("title", m[2]); header(h); root.appendChild(h);
+        } else add(`<h${m[1].length}>${inline(m[2], !plain)}</h${m[1].length}>`);
+        i++; continue;
+      }
+      if (/^\s*(-{3,}|\*{3,})\s*$/.test(line)) { flush(); add("<hr>"); i++; continue; }
+      if (!plain && (m = line.match(/^stats:\s*(.+)$/i))) {
+        flush();
+        root.appendChild(mk(stats, m[1].split("|").map((s) => {
+          const t = s.trim(), k = t.indexOf(" ");
+          return k > 0 ? `${t.slice(0, k)} | ${t.slice(k + 1)}` : t;
+        })));
+        i++; continue;
+      }
+      if (/^\s*\|/.test(line)) {
+        flush();
+        const rows = [];
+        while (i < L.length && /^\s*\|/.test(L[i])) rows.push(L[i++].trim());
+        const d = document.createElement("div");
+        table(d, rows, !plain);
+        root.appendChild(d);
+        continue;
+      }
+      if (/^>\s?/.test(line)) {
+        flush();
+        const q = [];
+        while (i < L.length && /^>\s?/.test(L[i])) q.push(L[i++].replace(/^>\s?/, ""));
+        const text = q.join(" ");
+        const cm = !plain && text.match(/^\**(Risk|Warning|Note|OK)\**:\s*(.*)$/i);
+        if (cm) {
+          const kind = { risk: "risk", warning: "warn", note: "note", ok: "ok" }[cm[1].toLowerCase()];
+          const d = document.createElement("div"); callout(d, kind, "", inline(cm[2])); root.appendChild(d);
+        } else add(`<blockquote>${inline(text, !plain)}</blockquote>`);
+        continue;
+      }
+      if (LI.test(line)) {
+        flush();
+        const r = list(L, i, plain);
+        add(r.html); i = r.i;
+        continue;
+      }
+      if (!line.trim()) { flush(); i++; continue; }
+      para.push(line.trim()); i++;
+    }
+    flush();
+    return root;
+  }
+
+
+  // Plain HTML the agent wrote (<p>, <li>, callout text...): same inline formatting as the components,
+  // so **bold**, `code`, [done] and CHK-1 work in any text. Component data and code are left alone.
+  const SKIP = "pre,code,script,style,textarea,svg,a,rk-header,rk-stats,rk-chart,rk-table,rk-diagram,rk-steps,rk-board,rk-pill,rk-status,rk-options,rk-gallery,rk-compare,rk-gauge,rk-checklist,rk-timeline,rk-findings,rk-toc,rk-cards";
+  function formatText(root) {
+    const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const todo = [];
+    for (let n; (n = walk.nextNode());) {
+      if (/[*`~[]|[A-Z]-\d/.test(n.data) && !n.parentElement.closest(SKIP)) todo.push(n);
+    }
+    todo.forEach((n) => {
+      const html = inline(n.data);
+      if (html === esc(n.data)) return;
+      const t = document.createElement("template");
+      t.innerHTML = html;
+      n.replaceWith(t.content);
+    });
+  }
+
+  // Every <h2> and what follows it up to the next <h2> becomes a section, so the agent never writes <section>.
+  // <h2 eyebrow="01 · Title"> gets the mono eyebrow line above it. The header (and a footer) stay top-level.
+  function sectionize(page) {
+    const out = [];
+    let cur = null;
+    const open = () => { cur = document.createElement("section"); cur.className = "rk-sec"; out.push(cur); };
+    for (const n of [...page.childNodes]) {
+      if (n.nodeType === 3 && !n.data.trim()) continue;
+      if (n.nodeType === 8) continue;
+      const tag = n.nodeType === 1 ? n.tagName : "";
+      if (tag === "H2") {
+        open();
+        const eb = n.getAttribute("eyebrow");
+        if (eb) { const s = document.createElement("span"); s.className = "rk-eyebrow"; s.textContent = eb; cur.appendChild(s); n.removeAttribute("eyebrow"); }
+        cur.appendChild(n);
+        continue;
+      }
+      if (/^(SCRIPT|STYLE|LINK|TEMPLATE|NOSCRIPT)$/.test(tag)) { out.push(n); continue; }
+      if (tag === "FOOTER" || (tag === "RK-HEADER" && !cur && !out.some((x) => x.tagName === "RK-HEADER"))) { out.push(n); cur = null; continue; }
+      if (!cur) open();
+      cur.appendChild(n);
+    }
+    page.replaceChildren(...out);
+  }
+
+  /* ---------- boot ---------- */
+
+  function boot() {
+    const head = document.head;
+    if (!head.querySelector("link[data-rk-fonts]")) {
+      for (const [href, cross] of [["https://fonts.googleapis.com", false], ["https://fonts.gstatic.com", true]]) {
+        const l = document.createElement("link"); l.rel = "preconnect"; l.href = href; if (cross) l.crossOrigin = ""; head.appendChild(l);
+      }
+      const f = document.createElement("link"); f.rel = "stylesheet"; f.href = FONTS; f.dataset.rkFonts = "1"; head.appendChild(f);
+    }
+    const st = document.createElement("style");
+    st.textContent = STYLE;
+    head.insertBefore(st, head.firstChild); // first in <head>: a page's own <style> (overrides) then always comes later and wins
+    if (!document.querySelector('meta[name="viewport"]')) {
+      const v = document.createElement("meta"); v.name = "viewport"; v.content = "width=device-width,initial-scale=1"; head.appendChild(v);
+    }
+    const body = document.body;
+    body.classList.add("rk");
+    const page = document.createElement("main");
+    page.className = "rk-page";
+    while (body.firstChild) page.appendChild(body.firstChild);
+    body.appendChild(page);
+
+    const md = page.querySelector("rk-md");
+    if (md) {
+      const plain = md.hasAttribute("plain");
+      if (plain) body.classList.add("rk-plain");
+      md.replaceWith(...renderMarkdown(rawText(md), plain).childNodes);
+    } else formatText(page);
+    sectionize(page);
+    if (!document.title) {
+      const h = page.querySelector("rk-header[title], h1");
+      if (h) document.title = (h.getAttribute("title") || h.textContent).replace(/[`*~]/g, "");
+    }
+    const run = (sel, fn) => page.querySelectorAll(sel).forEach((el) => fn(el));
+    run("rk-cols", (el) => {
+      el.innerHTML = `<div class="rk-grid2">${el.innerHTML}</div>`;
+      [...el.firstElementChild.children].forEach((c) => {
+        // a column that holds just one block (a chart, a table...) lets the block draw its own panel
+        if (/^RK-/.test(c.tagName)) { c.classList.add("rk-bare1"); return; }
+        if (c.children.length === 1 && /^RK-/.test(c.firstElementChild.tagName)) { c.classList.add("rk-bare"); return; }
+        c.classList.add("rk-panel", "rk-hov");
+        const k = c.getAttribute("kind");
+        if (k === "yes" || k === "no") c.classList.add("rk-" + k);
+      });
+    });
+    run("rk-header", (el) => { if (!el.querySelector(".rk-hd")) header(el); });
+    run("rk-stats", (el) => stats(el));
+    run("rk-chart", (el) => chart(el));
+    run("rk-table", (el) => table(el));
+    run("rk-callout", (el) => callout(el));
+    run("rk-diagram", (el) => diagram(el));
+    run("rk-steps", (el) => steps(el));
+    run("rk-board", (el) => board(el));
+    run("rk-status", (el) => status(el));
+    run("rk-options", (el) => options(el));
+    run("rk-gallery", (el) => gallery(el));
+    run("rk-compare", (el) => compare(el));
+    run("rk-gauge", (el) => gauge(el));
+    run("rk-checklist", (el) => checklist(el));
+    run("rk-timeline", (el) => timeline(el));
+    run("rk-cards", (el) => cards(el));
+    run("rk-toc", (el) => toc(el));
+    run("rk-findings", (el) => findings(el));
+    run("rk-pill", (el) => { const s = (el.getAttribute("s") || "todo").toLowerCase(); el.outerHTML = pill(s, el.textContent.trim() || s); });
+    run("table", (t) => { if (!t.closest(".rk-tw")) { const w = document.createElement("div"); w.className = "rk-tw"; t.replaceWith(w); w.appendChild(t); if (t.rows[0]?.cells.length >= 4) t.classList.add("wide"); } });
+    // phones: wide tables become label/value cards, so every cell needs its column name
+    document.querySelectorAll(".rk-tw table.wide").forEach((t) => {
+      const hr = t.querySelector("tr:has(th)"); if (!hr) return;
+      const hs = [...hr.cells].map((c) => c.textContent.trim());
+      t.querySelectorAll("tr").forEach((r) => { if (r !== hr) [...r.cells].forEach((c, i) => { if (!c.dataset.l) c.dataset.l = hs[i] || ""; }); });
+    });
+    document.documentElement.dataset.rkReady = "1";
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
+
+</script></head><body>
+<rk-header eyebrow="Здоровье мамы · iHerb Испания · 26.10.2026" title="Маме подходит MegaFood Women 55+, 1 таблетка в день" sub="Проверил все 1316 мультивитаминов iHerb, у 786 взрослых формул разобрал состав. Её ограничения (волчанка, Эутирокс, онемение пальцев, 10 лет преднизолона) прошли 47 позиций, в финал вышли 3 варианта и 1 бюджетный."></rk-header>
+
+<rk-status state="ok" you="Если осталась банка прежних витаминов — сфоткай, сверю, что это Vitamin Code 50+">Брать MegaFood Women 55+, банку на 120 таблеток: 62,70 €, хватает на 4 месяца (0,52 €/день)
+Цельнопищевые не лучше обычных, но и не вредят. Если без этого мама не согласится, MegaFood как раз цельнопищевой
+Прежние, скорее всего Vitamin Code 50+ от Garden of Life, есть в банке на 240 капсул. Но они в 2,4 раза дороже, и пить надо 4 капсулы в день
+Витамин D: мульти даст 1600 МЕ, Mastical ещё 800, вместе 2400 МЕ в день. Через 8–12 недель сдать анализ. Если меньше 40 нг/мл, добавить D3 2000 МЕ через день
+B-комплекс California Gold убрать: в нём 10–50 мг B6 на капсулу, а у неё онемение пальцев</rk-status>
+
+<rk-stats>1316 | мультивитаминов в каталоге iHerb ES
+786 | взрослых формул, разобран состав каждой
+47 | прошли все фильтры безопасности
+0,52 € | в день стоит выбранный вариант | + без железа и кальция</rk-stats>
+
+<rk-toc></rk-toc>
+
+<h2 eyebrow="01 · Критерии">По чему отсеивал (зафиксировано до выгрузки)</h2>
+<p>Каждый порог взят из её анализов и истории болезни, а не из общих норм. Дозы считаются на то, что она реально выпьет за день. Если банку можно пить половинной дозой, считается и такой вариант.</p>
+<rk-table>Что | Порог | Почему именно у неё
+B6 | **≤ 10 мг/сут**, лучше ≤ 5 | Онемение 4 пальцев на обеих руках. Безопасный максимум в ЕС (EFSA 2023) 12 мг вместе с едой. B6 сверх него даёт нейропатию
+Железо | **0** | Постменопауза, ферритин в норме. Железо мешает усваиваться Эутироксу
+Ретинол (готовый вит. A) | ≤ 900 мкг | 10 лет преднизолона, кости под риском. Ретинол в больших дозах повышает риск переломов
+Бета-каротин | ≤ 20 мг | Риск (рак лёгких) показан только у курильщиков на 20–30 мг; мама не курит
+Витамин E | ≤ 150 мг | Был лакунарный инфаркт, плюс напроксен. Высокие дозы E повышают риск кровоизлияния
+Селен | ≤ 100 мкг | Антитела к щитовидке отрицательные, для неё пользы нет. 200 мкг связаны с диабетом 2 типа
+Йод | ≤ 150 мкг | Гипотиреоз на Эутироксе
+Цинк | ≤ 25 мг; больше 10 мг — только с медью | Без меди цинк вызывает её дефицит, а он даёт нейропатию
+Биотин | ≤ 1 мг | Искажает анализ ТТГ
+Травы | **ни одной из списка** | Люцерна, спирулина, хлорелла, эхинацея, астрагал, грибы-иммуностимуляторы стимулируют иммунитет, а у неё волчанка. Зверобой повышает чувствительность к солнцу, ашваганда влияет на щитовидку, куркума, зелёный чай и клопогон опасны для печени, гинкго и женьшень плохо сочетаются с напроксеном
+Не плацебо | D ≥ 400 МЕ, B12 ≥ 2,4 мкг, фолат ≥ 200, цинк ≥ 5 мг; не меньше 15 из 21 витаминов и минералов на ≥ 50% нормы | Иначе нет смысла пить
+Остальное | взрослая формула, не мармелад, в наличии в Испании | </rk-table>
+
+<h2 eyebrow="02 · Воронка">Почему отсеялось 739 из 786</h2>
+<rk-chart title="Сколько формул нарушили каждый критерий" note="Одна формула может нарушать несколько критериев сразу" unit="">
+Травы из стоп-листа: 397 [bad]
+Плацебо-дозы: 323 [s3]
+Железо: 306 [bad]
+B6 больше 10 мг: 245 [bad]
+Ретинол больше 900 мкг: 109 [s2]
+Бета-каротин больше 20 мг: 80 [s2]
+Нет в наличии: 55 [alt]
+Селен больше 100 мкг: 48 [s2]
+Биотин больше 1 мг: 29 [s2]
+Йод больше 150 мкг: 18 [s2]
+</rk-chart>
+<rk-callout kind="note" title="Главное открытие">Больше всего «природных» и цельнопищевых линеек отсеялось из-за трав. Например, New Chapter (люцерна, эхинацея, куркума), MegaFood для 40+ (ашваганда, грибы), Rainbow Light (спирулина, ашваганда). Вполне возможно, что врач, запретивший ей «витамины», имел в виду именно такие добавки: при волчанке иммуностимуляторы нежелательны.</rk-callout>
+
+<h2 eyebrow="03 · Выбор">Финалисты</h2>
+<rk-options>Вариант | €/день | В день | Плюсы | Минусы
+* [MegaFood Women 55+, 120 таб.](https://es.iherb.com/pr/megafood-one-daily-multivitamin-for-women-55-120-tablets/89401) — 62,70 € | 0,52 | 1 таблетка | Цельнопищевой, значит мама примет. D3 1600 МЕ, B6 3 мг, ретинола нет. Нет кальция, железа и магния, поэтому почти не конфликтует с Эутироксом и Dolquine. 1954 отзыва, 4,8 | Фолата 200 мкг (половина нормы), меди и магния нет. У неё фолат в норме, так что это не критично
+[NATURELO One Daily 50+, 60 капс.](https://es.iherb.com/pr/naturelo-one-daily-multivitamin-for-women-50-60-vegetarian-capsules/97677) — 28,92 € | 0,48 | 1 капсула | Самый полный состав: K2 (MK-7), медь, магний 60 мг, фолат 400. B6 1,9 мг. Подаётся как растительный, маме тоже подойдёт. 4676 отзывов | D только 880 МЕ, поэтому сразу добавить D3. На iHerb есть вторая версия с грибами, при заказе сверять состав
+[Garden of Life Vitamin Code 50+, 240 капс.](https://es.iherb.com/pr/garden-of-life-vitamin-code-whole-food-multivitamin-for-women-50-240-vegetarian-capsules/22349) — 75,23 € | 1,25 | 4 капсулы | Скорее всего, это её прежние. Банки на 120 капсул нет, а на 240 есть. D3 2000, K1 и K2, B6 3,4, ретинола нет | Дороже в 2,4 раза, а капсул в 4 раза больше. Половинная доза не выход: цинк и фолат падают ниже порога
+[21st Century Sentry Senior, 125 таб.](https://es.iherb.com/pr/21st-century-sentry-senior-multivitamin-multimineral-supplement-adults-50-125-tablets/37357) — 8,78 € | 0,07 | 1 таблетка | В 7 раз дешевле MegaFood. Нормальные дозы, 12 тыс. отзывов. Копия Centrum Silver | Обычная синтетика, мама может отказаться. Красители, ретинол 450, кальций 220: пить строго в обед. Селен 19 мкг</rk-options>
+
+<h3>Дозы в сравнении (в день)</h3>
+<rk-table kind="compact">Что | Норма | MegaFood | NATURELO | Vitamin Code | Sentry
+D3, МЕ | 600 | **1600** | 880 | **2000** | 1000
+Ретинол, мкг | ≤ 900 | 0 | 0 | 0 | 450
+Бета-каротин, мг | — | 2,2 | 10,8 | 13 | 3,6
+E, мг | 15 | 12 | 15 | 15 | 22,5
+K, мкг | 90 | 80 (K1) | 45 (K2) | 72 K1 + 20 K2 | 30
+B6, мг | 1,5 (макс. 12) | 3 | 1,9 | 3,4 | 3
+Фолат, мкг DFE | 400 | 200 | 400 | 400 | 667
+B12, мкг | 2,4 | 4,8 | 2,4 | 80 | 25
+Биотин, мкг | 30 | 55 | 45 | 30 | 30
+Йод, мкг | 150 | 80 | 100 | 75 | 150
+Цинк, мг | 8 | 9,5 | 10 | 7,7 | 11
+Медь, мг | 0,9 | — | 0,5 | — | 0,5
+Селен, мкг | 55 | 55 | 50 | 55 | 19
+Магний, мг | 320 | — | 60 | — | 50
+Кальций, мг | (Mastical) | — | 60 | — | 220
+Железо | 0 | 0 | 0 | 0 | 0</rk-table>
+
+<h2 eyebrow="04 · Цельнопищевые">Переплачивали за них или нет</h2>
+<rk-cols><div kind="yes"><b>Что это на самом деле</b>
+<p>Состав на банке говорит сам за себя: «витамин D3 из пекарских дрожжей», «ферментированный холекальциферол». Производитель кормит дрожжи теми же витаминами, что и в обычных таблетках, а потом сушит. Молекулы в итоге те же. Исследований, где цельнопищевые дали бы больше пользы для здоровья, нет. Есть только мелкие работы на деньги производителей про всасывание.</p></div>
+<div kind="no"><b>Вывод</b>
+<p>Да, переплачивали, примерно в 2–5 раз. Но этим вы купили мамино согласие, а это тоже результат. Поэтому первый вариант цельнопищевой, но без трав. Если мама готова пить обычные, Sentry Senior даёт почти то же в 7 раз дешевле.</p></div></rk-cols>
+<rk-callout kind="note" title="Фраза для её врача, по-испански">«Tomo un multivitamínico sin hierro (MegaFood Women 55+): vitamina D3 1600 UI, B6 3 mg, sin hierbas. ¿Hay algún inconveniente con Dolquine o Eutirox?»</rk-callout>
+
+<h2 eyebrow="05 · Витамин D">Сколько и почему не 10–50 тысяч</h2>
+<rk-steps>Сейчас | Mastical D даёт 800 МЕ, анализ 35–40 нг/мл. По большинству руководств это норма (≥ 30), но для неё лучше 40–60 |
+Начать | MegaFood 1600 + Mastical 800 = **2400 МЕ/сут**. Грубый ориентир: +1 нг/мл на каждые 100 МЕ, то есть плюс 10–15 нг/мл | ~3 мес.
+Через 8–12 недель | Анализ: 25(OH)D и кальций в крови. За 2–3 дня до него не пить мульти (из-за биотина) |
+Если < 40 нг/мл | [NOW D3 2000 МЕ, 120 капс., 5,62 €](https://es.iherb.com/pr/now-foods-vitamin-d3-2-000-iu-120-softgels/8229): 1 капсула через день. По уровню в крови это то же, что 1000 МЕ ежедневно (D накапливается неделями). Банки хватит на 8 месяцев, ~0,02 €/день | итого ~3400 МЕ
+Потолок | Без врача не больше 4000 МЕ/сут суммарно (EFSA) | </rk-steps>
+<rk-callout kind="risk" title="Почему ей не нужна схема, которая сработала у тебя">У тебя был дефицит, и восполнить его можно было только большими дозами. Она не в дефиците. При этом у неё СКФ 69, кальцинаты в мягких тканях, и она ежедневно пьёт кальций. Единственный реальный вред витамина D — это избыток кальция в крови. Поэтому дозу повышаем постепенно и только по анализу.</rk-callout>
+
+<h2 eyebrow="06 · Схема">Как пить</h2>
+<rk-timeline>Утро, натощак | Эутирокс | за 30–60 мин до еды, только с водой
+Обед | Мультивитамин | минимум через 4 ч после Эутирокса
+Ужин | Mastical D | как сейчас
+— | B-комплекс California Gold | **убрать**: мульти его заменяет, B6 в нём в 3–8 раз выше безопасного [риск]
+За 2–3 дня до крови | Мульти не пить | биотин искажает ТТГ</rk-timeline>
+
+<h2 eyebrow="07 · Экономия">Где выгоднее</h2>
+<rk-table>Ход | Эффект
+MegaFood брать по 120 таблеток, а не по 90 или 60 | 0,52 против 0,54 и 0,57 €/день
+D3 2000 через день вместо 1000 каждый день | одна банка на 8 месяцев за 5,62 €
+Таблетки не делить | MegaFood и так 1 в день. Если пить 2 капсулы Vitamin Code вместо 4, будет 0,63 €/день, но цинк и фолат упадут ниже порога
+Не переплачивать за премиум | Thorne Advanced Nutrients 2,17 €/день: мега-дозы группы B, селен 100. Ей пользы нет</rk-table>
+
+<h2 eyebrow="08 · Известные бренды">Почему не они</h2>
+<rk-table kind="compact">Продукт | Что не так
+[New Chapter Every Woman's 55+](https://es.iherb.com/pr/new-chapter-one-daily-every-woman-s-multivitamin-55-72-vegetarian-tablets/73267) | люцерна, куркума
+[MegaFood Women's 40+](https://es.iherb.com/pr/megafood-women-s-40-one-daily-multivitamin-90-tablets/16683) | ашваганда, эхинацея, грибы, куркума, железо
+[Rainbow Light Women's One 50+](https://es.iherb.com/pr/rainbow-light-women-s-one-50-daily-multivitamin-high-potency-60-vegetarian-tablets/116546) | спирулина, ашваганда, B6 20 мг, железо
+[Solgar One Daily Women's 50+](https://es.iherb.com/pr/solgar-one-daily-women-s-multi-50-60-capsules/138057) | ретинол 1350, куркума, йод 165
+[Centrum Silver Women 50+](https://es.iherb.com/pr/centrum-silver-women-50-multivitamin-100-tablets/125286) | железо 8, ретинол 1050
+[Pure Encapsulations Women's Nutrients](https://es.iherb.com/pr/pure-encapsulations-women-s-nutrients-40-180-capsules/51871) | зелёный чай, куркума, B6 10
+[Life Extension One-Per-Day](https://es.iherb.com/pr/life-extension-one-per-day-multivitamin-60-tablets/86016) | B6 75 мг, селен 200, цинк без меди
+[Thorne Women's Multi 50+](https://es.iherb.com/pr/thorne-women-s-multi-50-180-capsules/102918) | ретинол 938
+[NOW Eve](https://es.iherb.com/pr/now-foods-eve-superior-women-s-multi-180-tablets/16541) | спирулина, B6 25 мг, железо 18
+[Garden of Life Vitamin Code Women (без «50+»)](https://es.iherb.com/pr/garden-of-life-vitamin-code-whole-food-multivitamin-women-240-vegetarian-capsules/22348) | железо 8</rk-table>
+
+<h2 eyebrow="09 · Уверенность">Что проверено, а что нет</h2>
+<rk-checklist>[x] Каталог iHerb ES выгружен целиком 26.10: цены в €, наличие и составы
+[x] Ошибки перевода на iHerb (мг вместо мкг) исправлены сверкой с колонкой «% нормы»
+[x] Финалисты проверены вручную по полной этикетке
+[ ] Что мама пила раньше: Vitamin Code 50+ — моя догадка по описанию
+[x] Мама не курит: бета-каротин в вариантах 2–3 безопасен
+[ ] Сторонние проверки качества (USP/NSF) у MegaFood на странице iHerb не указаны</rk-checklist>
+
+<h2 eyebrow="10 · Приложение">Все 47 прошедших фильтры</h2>
+<p>Цена за день считается при той дозе, при которой формула проходит фильтры. «Доза» показывает, сколько таблеток из суточной порции пить.</p>
+<rk-table kind="compact">Продукт | €/день | Доза | B6, мг | D, МЕ | Ретинол | Отзывы
+[21st Century, Sentry Senior, мультивитаминная и мультиминеральная добавка, для взрослых от 50 лет, 125 таблеток](https://es.iherb.com/pr/21st-century-sentry-senior-multivitamin-multimineral-supplement-adults-50-125-tablets/37357) | 0,07 | 1 из 1 | 3,0 | 1000 | 450 | 12029
+[Deva, веганская добавка с мультивитаминами и минералами, без железа, 90 маленьких таблеток](https://es.iherb.com/pr/deva-vegan-multivitamin-mineral-supplement-iron-free-90-tiny-tablets/120290) | 0,09 | 1 из 1 | 2,1 | 800 | 225 | 409
+[Futurebiotics, мультивитамины для женщин старше 50 лет, 180 таблеток](https://es.iherb.com/pr/futurebiotics-women-s-50-multivitamin-180-tablets/156319) | 0,09 | 1 из 1 | 6,0 | 1000 | 840 | 60
+[Mason Natural, Vitrum 50+, мультивитамины для взрослых, без железа, 100 капсул](https://es.iherb.com/pr/mason-natural-vitrum-50-adult-multi-iron-free-100-caplets/151893) | 0,11 | 1 из 1 | 3,0 | 1000 | 450 | 49
+[Nature's Truth, ABC, мультивитаминный комплекс, для пожилых людей старше 50 лет, 100 капсул в оболочке](https://es.iherb.com/pr/nature-s-truth-abc-complete-multivitamin-50-senior-100-coated-caplets/141914) | 0,11 | 1 из 1 | 3,0 | 1000 | 532 | 68
+[Carlson, Mini-Multi, витамины и минералы, без железа, 180 таблеток](https://es.iherb.com/pr/carlson-mini-multi-vitamins-minerals-180-mini-tablets/10160) | 0,15 | 1 из 1 | 2,0 | 600 | 0 | 558
+[Nature's Way, Alive!®, мультивитамины для женщин старше 50 лет, 110 таблеток](https://es.iherb.com/pr/nature-s-way-alive-women-s-50-complete-multivitamin-110-tablets/131499) | 0,20 | 1 из 1 | 5,1 | 2000 | 630 | 8723
+[Centrum, Серебро, для взрослых старше 50 лет, 80 таблеток](https://es.iherb.com/pr/centrum-silver-adults-50-80-tablets/125287) | 0,20 | 1 из 1 | 3,0 | 1000 | 750 | 663
+[Nature's Way, Alive! Комплексные мультивитамины для женщин старше 50 лет, 130 таблеток](https://es.iherb.com/pr/nature-s-way-alive-women-s-50-complete-multivitamin-130-tablets/116138) | 0,21 | 1 из 1 | 5,1 | 2000 | 630 | 8723
+[Carlson, Mini Multi, 90 мини-таблеток](https://es.iherb.com/pr/carlson-mini-multi-90-mini-tablets/125497) | 0,22 | 1 из 1 | 2,0 | 600 | 0 | 558
+[One-A-Day, мультивитамины для женщин старше 50 лет, 100 таблеток](https://es.iherb.com/pr/one-a-day-women-s-50-multi-100-tablets/69715) | 0,22 | 1 из 1 | 6,0 | 1000 | 837 | 4491
+[One-A-Day, мультивитамины для женщин старше 50 лет, 65 таблеток](https://es.iherb.com/pr/one-a-day-women-s-50-multi-65-tablets/101190) | 0,25 | 1 из 1 | 6,0 | 1000 | 837 | 4491
+[Nature's Way, Alive!®, комплекс мультивитаминов для женщин старше 50 лет, 50 таблеток](https://es.iherb.com/pr/nature-s-way-alive-women-s-50-complete-multivitamin-50-tablets/105878) | 0,30 | 1 из 1 | 5,1 | 2000 | 630 | 8723
+[Nature's Way, Alive!®, мультивитамины для людей с диабетом, 60 таблеток](https://es.iherb.com/pr/nature-s-way-alive-diabetic-multivitamin-60-tablets/119254) | 0,32 | 1 из 2 | 10,0 | 400 | 25 | 300
+[Nature's Way, Completia®, мультивитамины для приёма при диабете, 90 таблеток](https://es.iherb.com/pr/nature-s-way-completia-diabetic-multivitamin-90-tablets/11257) | 0,34 | 1 из 2 | 10,0 | 400 | 750 | 2311
+[One-A-Day, Мужской Pro Edge® полноценный мультивитаминный комплекс с больше, 50 таблеток](https://es.iherb.com/pr/one-a-day-men-s-pro-edge-complete-multivitamin-with-more-50-tablets/127282) | 0,35 | 1 из 1 | 4,0 | 800 | 892 | 93
+[Nature's Way, Completia, мультивитамины для диабетиков, 60 таблеток](https://es.iherb.com/pr/nature-s-way-completia-diabetic-multivitamin-60-tablets/88452) | 0,37 | 1 из 2 | 10,0 | 400 | 750 | 2311
+[NATURELO, One Daily, мультивитамины для женщин старше 50 лет, для приёма один раз в день, 60 вегетарианских капсул](https://es.iherb.com/pr/naturelo-one-daily-multivitamin-for-women-50-60-vegetarian-capsules/97677) | 0,48 | 1 из 1 | 1,9 | 880 | 0 | 4676
+[Thorne, базовые питательные вещества, 2 раза в день, 120 капсул](https://es.iherb.com/pr/thorne-basic-nutrients-2-day-120-capsules/156194) | 0,51 | 1 из 2 | 10,0 | 1000 | 225 | 12447
+[MegaFood, Мультивитаминный комплекс для женщин от 55 лет, 120 таблеток](https://es.iherb.com/pr/megafood-one-daily-multivitamin-for-women-55-120-tablets/89401) | 0,52 | 1 из 1 | 3,0 | 1600 | 0 | 1954
+[Thorne, базовые питательные вещества, 2 капсулы в день, 60 капсул](https://es.iherb.com/pr/thorne-basic-nutrients-2-day-60-capsules/85476) | 0,54 | 1 из 2 | 10,0 | 1000 | 225 | 12447
+[MegaFood, One Daily, мультивитаминный комплекс для женщин от 55 лет, 90 таблеток](https://es.iherb.com/pr/megafood-one-daily-multivitamin-for-women-55-90-tablets/89399) | 0,54 | 1 из 1 | 3,0 | 1600 | 0 | 1954
+[Carlson, Nutra-Support®, диабет, 60 капсул](https://es.iherb.com/pr/carlson-nutra-support-diabetes-60-soft-gels/127388) | 0,56 | 1 из 2 | 10,0 | 500 | 750 | 64
+[Designs For Health, Мультивитамины Twice Daily, 240 вегетарианских капсул](https://es.iherb.com/pr/designs-for-health-twice-daily-multi-240-vegetarian-capsules/145072) | 0,56 | 1 из 2 | 2,6 | 500 | 240 | 92
+[MegaFood, One Daily мультивитамины, для женщин 55+, 60 таблеток](https://es.iherb.com/pr/megafood-one-daily-multivitamin-for-women-55-60-tablets/83984) | 0,57 | 1 из 1 | 3,0 | 1600 | 0 | 1954
+[Emerald Laboratories, комплекс мультивитаминов для приема 1 раз в день, 60 растительных капсул](https://es.iherb.com/pr/emerald-laboratories-coenzymated-complete-1-daily-multi-60-vegetable-caps/129480) | 0,57 | 1 из 1 | 10,0 | 1000 | 150 | 297
+[MegaFood, Мультивитамины One Daily, без железа, 90 таблеток](https://es.iherb.com/pr/megafood-one-daily-multivitamin-iron-free-90-tablets/4014) | 0,58 | 1 из 1 | 6,0 | 400 | 0 | 232
+[Life Extension, мультивитамины из цельных продуктов, 90 вегетарианских капсул](https://es.iherb.com/pr/life-extension-whole-food-multivitamin-90-vegetarian-capsules/111760) | 0,60 | 2 из 3 | 2,8 | 667 | 0 | 265
+[Thorne, базовые питательные вещества, 2 капсулы в день, 60 капсул](https://es.iherb.com/pr/thorne-basic-nutrients-2-day-60-capsules/52954) | 0,60 | 1 из 2 | 10,0 | 1000 | 225 | 1788
+[Pure Encapsulations, Junior Nutrients, 120 капсул](https://es.iherb.com/pr/pure-encapsulations-junior-nutrients-120-capsules/145673) | 0,61 | 2 из 2 | 2,0 | 400 | 188 | 38
+[Designs For Health, Мультивитамины Twice Daily, 120 вегетарианских капсул](https://es.iherb.com/pr/designs-for-health-twice-daily-multi-120-vegetarian-capsules/54987) | 0,62 | 1 из 2 | 2,6 | 500 | 240 | 92
+[Emerald Laboratories, Коэнзимные мультивитамины для женщин, 1 прием в день, 30 растительных капсул](https://es.iherb.com/pr/emerald-laboratories-coenzymated-women-s-1-daily-multi-30-vegetable-capsules/69770) | 0,70 | 1 из 1 | 10,0 | 1000 | 150 | 719
+[Seeking Health, Multivitamin One MF, мультивитамины, 45 капсул](https://es.iherb.com/pr/seeking-health-multivitamin-one-mf-45-capsules/122640) | 0,72 | 1 из 1 | 10,0 | 1000 | 375 | 332
+[LifeSeasons, NeuroQ® Здоровье мозга, мультивитамины, 60 таблеток](https://es.iherb.com/pr/lifeseasons-neuroq-brain-health-multi-vitamin-60-tablets/128575) | 0,86 | 2 из 2 | 1,7 | 4000 | 900 | 43
+[Bariatric Advantage, Multi Chewy Bite, клубника и арбуз, 60 жевательных таблеток](https://es.iherb.com/pr/bariatric-advantage-multi-chewy-bite-strawberry-watermelon-60-soft-chews/141793) | 0,88 | 1 из 2 | 2,0 | 1500 | 750 | 9
+[Bariatric Advantage, Multi Chewy Bite, фруктовое ассорти, 60 жевательных таблеток](https://es.iherb.com/pr/bariatric-advantage-multi-chewy-bite-assorted-fruit-60-soft-chews/141808) | 0,89 | 1 из 2 | 2,0 | 1500 | 750 | 11
+[MegaFood, мультивитамины для всего тела для женщин, со вкусом клубники, 90 вегетарианских жевательных таблеток](https://es.iherb.com/pr/megafood-women-s-whole-body-multi-gummy-strawberry-90-vegetarian-gummies/159762) | 1,01 | 3 из 3 | 2,0 | 2000 | 450 | 118
+[Bariatric Advantage, Жевательные Advanced Multi EA без железа, фруктовое ассорти, 60 таблеток](https://es.iherb.com/pr/bariatric-advantage-chewable-advanced-multi-ea-without-iron-mixed-fruit-60-tablets/141801) | 1,02 | 1 из 2 | 2,0 | 1500 | 375 | 8
+[Seeking Health, Multivitamin One, жевательные таблетки, 30 жевательных таблеток](https://es.iherb.com/pr/seeking-health-multivitamin-one-chewable-30-tablets/109884) | 1,07 | 1 из 1 | 2,0 | 1000 | 375 | 140
+[Garden of Life, Vitamin Code®, мультивитамины из цельных продуктов для женщин старше 50 лет, 240 вегетарианских капсул](https://es.iherb.com/pr/garden-of-life-vitamin-code-whole-food-multivitamin-for-women-50-240-vegetarian-capsules/22349) | 1,25 | 4 из 4 | 3,4 | 2000 | 0 | 4049
+[Codeage, Мультивитаминный комплекс Elite Max, Sport, 90 растительных капсул](https://es.iherb.com/pr/codeage-multivitamin-performance-elite-max-sport-90-vegetable-capsules/139038) | 1,43 | 3 из 3 | 3,4 | 4500 | 375 | 111
+[Codeage, Sport, Multivitamin Recovery Elite Max, 90 растительных капсул](https://es.iherb.com/pr/codeage-sport-multivitamin-recovery-elite-max-90-vegetable-capsules/139039) | 1,44 | 3 из 3 | 3,4 | 500 | 375 | 156
+[Emerald Laboratories, коферментные добавки для женщин старше 45 лет, клинические и мультивитамины, 120 растительных капсул](https://es.iherb.com/pr/emerald-laboratories-coenzymated-women-s-45-clinical-multi-120-vegetable-caps/129486) | 1,84 | 4 из 4 | 10,0 | 1500 | 300 | 26
+[Thorne, Улучшенные питательные вещества, 120 капсул](https://es.iherb.com/pr/thorne-advanced-nutrients-120-capsules/18465) | 2,17 | 4 из 4 | 5,0 | 1000 | 5 | 1122
+[Designs For Health, Designs For Sport®, мультивитаминная добавка для ежедневного применения, 30 пакетиков](https://es.iherb.com/pr/designs-for-health-designs-for-sport-daily-multivitamin-performance-power-pack-30-packs/149266) | 3,87 | 1 из 1 | 3,4 | 1000 | 375 | 24
+[NOW Foods, Daily Vits™, 30 растительных капсул](https://es.iherb.com/pr/now-foods-daily-vits-30-veg-capsules/86754) | — | 1 из 1 | 2,0 | 400 | 75 | 10874
+[NOW Foods, Daily Vits™, мультивитамины и минералы, 120 растительных капсул](https://es.iherb.com/pr/now-foods-daily-vits-multi-vitamin-mineral-120-veg-capsules/86755) | — | 1 из 1 | 2,0 | 400 | 75 | 10873
+</rk-table>
+</body></html>
